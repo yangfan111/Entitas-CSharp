@@ -13,6 +13,10 @@ namespace Entitas {
 
     public delegate void EntityEvent(IEntity entity);
 
+    /// <summary>
+    /// 一个component的管理器 
+    /// IEntity : IAERC 
+    /// </summary>
     public interface IEntity : IAERC {
 
         event EntityComponentChanged OnComponentAdded;
@@ -25,7 +29,11 @@ namespace Entitas {
         int creationIndex { get; }
         bool isEnabled { get; }
 
+        //icomponent池
         Stack<IComponent>[] componentPools { get; }
+        //存储entity信息
+        // public readonly string[] componentNames;
+        // public readonly Type[] componentTypes;
         ContextInfo contextInfo { get; }
         IAERC aerc { get; }
 

@@ -8,7 +8,7 @@ namespace Entitas {
     /// entity.Destroy() to destroy it.
     /// You can add, replace and remove IComponent to an entity.
     public class Entity : IEntity {
-
+        ///-事件回调封装
         /// Occurs when a component gets added.
         /// All event handlers will be removed when
         /// the entity gets destroyed by the context.
@@ -36,7 +36,7 @@ namespace Entitas {
 
         /// The total amount of components an entity can possibly have.
         public int totalComponents { get { return _totalComponents; } }
-
+        ///-被context管理
         /// Each entity has its own unique creationIndex which will be set by
         /// the context when you create the entity.
         public int creationIndex { get { return _creationIndex; } }
@@ -45,8 +45,8 @@ namespace Entitas {
         /// Active entities are enabled, destroyed entities are not.
         public bool isEnabled { get { return _isEnabled; } }
 
-        /// componentPools is set by the context which created the entity and
-        /// is used to reuse removed components.
+        ///-components的创建重用
+        ///-entity.CreateComponent/GetComponentPool(index)
         /// Removed components will be pushed to the componentPool.
         /// Use entity.CreateComponent(index, type) to get a new or
         /// reusable component from the componentPool.
@@ -57,14 +57,17 @@ namespace Entitas {
         /// The contextInfo is set by the context which created the entity and
         /// contains information about the context.
         /// It's used to provide better error messages.
+        ///-contexts数据信息-It's used to provide better error messages.
         public ContextInfo contextInfo { get { return _contextInfo; } }
 
-        /// Automatic Entity Reference Counting (AERC)
+
         /// is used internally to prevent pooling retained entities.
         /// If you use retain manually you also have to
         /// release it manually at some point.
+        ///-AERC的意思 ：Automatic Entity Reference Counting (AERC) ，就是entitas的计数器
+        
         public IAERC aerc { get { return _aerc; } }
-
+        //没啥用
         readonly List<IComponent> _componentBuffer;
         readonly List<int> _indexBuffer;
 
@@ -72,11 +75,15 @@ namespace Entitas {
         bool _isEnabled;
 
         int _totalComponents;
+        ///-内部实际使用的数据
         IComponent[] _components;
+        /// <summary>
+        /// 将共享数据池传进来，供多个实例共享，牛逼！！！！！！！
+        /// </summary>
         Stack<IComponent>[] _componentPools;
         ContextInfo _contextInfo;
         IAERC _aerc;
-
+        //返回值使用
         IComponent[] _componentsCache;
         int[] _componentIndicesCache;
         string _toStringCache;
@@ -97,7 +104,10 @@ namespace Entitas {
             _contextInfo = contextInfo ?? createDefaultContextInfo();
             _aerc = aerc ?? new SafeAERC(this);
         }
-
+        /// <summary>
+        /// createDefaultContextInfo
+        /// </summary>
+        /// <returns></returns>
         ContextInfo createDefaultContextInfo() {
             var componentNames = new string[totalComponents];
             for (int i = 0; i < componentNames.Length; i++) {
@@ -106,7 +116,10 @@ namespace Entitas {
 
             return new ContextInfo("No Context", componentNames, null);
         }
-
+        /// <summary>
+        ///-enabled
+        /// </summary>
+        /// <param name="creationIndex"></param>
         public void Reactivate(int creationIndex) {
             _creationIndex = creationIndex;
             _isEnabled = true;
@@ -185,7 +198,11 @@ namespace Entitas {
                 AddComponent(index, component);
             }
         }
-
+        /// <summary>
+        ///-在此处会对池子进行push操作
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="replacement"></param>
         void replaceComponent(int index, IComponent replacement) {
             // TODO VD PERFORMANCE
             // _toStringCache = null;
@@ -239,7 +256,7 @@ namespace Entitas {
             return _components[index];
         }
 
-        /// Returns all added components.
+        ///-构造了一个新的list包含引用
         public IComponent[] GetComponents() {
             if (_componentsCache == null) {
                 for (int i = 0; i < _components.Length; i++) {
@@ -318,6 +335,8 @@ namespace Entitas {
         /// Removed components will be pushed to the componentPool.
         /// Use entity.CreateComponent(index, type) to get a new or
         /// reusable component from the componentPool.
+        ///-create/remove来对component池进行操作
+        ///-每个index对应一个池子
         public Stack<IComponent> GetComponentPool(int index) {
             var componentPool = _componentPools[index];
             if (componentPool == null) {
@@ -330,6 +349,7 @@ namespace Entitas {
 
         /// Returns a new or reusable component from the componentPool
         /// for the specified component index.
+        ///-反射动态创建一个compoent（从池子里）
         public IComponent CreateComponent(int index, Type type) {
             var componentPool = GetComponentPool(index);
             return componentPool.Count > 0

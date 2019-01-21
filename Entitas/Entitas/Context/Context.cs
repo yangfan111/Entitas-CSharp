@@ -37,6 +37,7 @@ namespace Entitas {
 
         /// The contextInfo contains information about the context.
         /// It's used to provide better error messages.
+        ///-使用contextInfo来索引少量的父级信息
         public ContextInfo contextInfo { get { return _contextInfo; } }
 
         /// Returns the number of entities in the context.
@@ -52,25 +53,39 @@ namespace Entitas {
 
         readonly int _totalComponents;
 
+        /// <summary>
+        /// 共享数据池
+        /// </summary>
         readonly Stack<IComponent>[] _componentPools;
         readonly ContextInfo _contextInfo;
         readonly Func<IEntity, IAERC> _aercFactory;
         readonly Func<TEntity> _entityFactory;
-
+        /// <summary>
+        ///-实体集合
+        /// </summary>
         readonly HashSet<TEntity> _entities = new HashSet<TEntity>(EntityEqualityComparer<TEntity>.comparer);
         readonly Stack<TEntity> _reusableEntities = new Stack<TEntity>();
         readonly HashSet<TEntity> _retainedEntities = new HashSet<TEntity>(EntityEqualityComparer<TEntity>.comparer);
-
+        /// <summary>
+        ///-group集合
+        /// </summary>
         readonly Dictionary<IMatcher<TEntity>, IGroup<TEntity>> _groups = new Dictionary<IMatcher<TEntity>, IGroup<TEntity>>();
+        /// <summary>
+        ///-group集合-list形式
+        /// </summary>
         readonly List<IGroup<TEntity>>[] _groupsForIndex;
         readonly ObjectPool<List<GroupChanged<TEntity>>> _groupChangedListPool;
-
+        /// <summary>
+        ///-indics管理
+        /// </summary>
         readonly Dictionary<string, IEntityIndex> _entityIndices;
 
         int _creationIndex;
-
+        /// <summary>
+        ///-entities的复制体
+        /// </summary>
         TEntity[] _entitiesCache;
-
+        //子级事件:添加可以避免gc
         // Cache delegates to avoid gc allocations
         readonly EntityComponentChanged _cachedEntityChanged;
         readonly EntityComponentReplaced _cachedComponentReplaced;

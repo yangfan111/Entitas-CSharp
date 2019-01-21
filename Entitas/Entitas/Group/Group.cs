@@ -8,8 +8,13 @@ namespace Entitas {
     /// The created group is managed by the context and will always be up to date.
     /// It will automatically add entities that match the matcher or
     /// remove entities as soon as they don't match the matcher anymore.
+    /// 
+
+    ///-会动态更新，通过 Calling context.GetGroup(matcher)  匹配获取，context管理
     public class Group<TEntity> : IGroup<TEntity> where TEntity : class, IEntity {
 
+
+        ///-当group内部add entity时添加
         /// Occurs when an entity gets added.
         public event GroupChanged<TEntity> OnEntityAdded;
 
@@ -27,6 +32,9 @@ namespace Entitas {
 
         readonly IMatcher<TEntity> _matcher;
 
+        /// <summary>
+        ///-当前group内包含的entitias
+        /// </summary>
         readonly HashSet<TEntity> _entities = new HashSet<TEntity>(
             EntityEqualityComparer<TEntity>.comparer
         );
@@ -51,6 +59,7 @@ namespace Entitas {
         }
 
         /// This is used by the context to manage the group.
+        ///-由context调用管理
         public void HandleEntity(TEntity entity, int index, IComponent component) {
             if (_matcher.Matches(entity)) {
                 addEntity(entity, index, component);
@@ -117,6 +126,7 @@ namespace Entitas {
             if (removed) {
                 _entitiesCache = null;
                 _singleEntityCache = null;
+                //-移除当前对象对它的引用
                 entity.Release(this);
             }
 
