@@ -64,11 +64,12 @@ namespace Entitas {
         /// is used internally to prevent pooling retained entities.
         /// If you use retain manually you also have to
         /// release it manually at some point.
-        ///-AERC的意思 ：Automatic Entity Reference Counting (AERC) ，就是entitas的计数器
+        ///-AERC的意思 ：Automatic Entity Reference Counting (AERC) ，就是entitas引用计数器/缓存器
         
         public IAERC aerc { get { return _aerc; } }
         //没啥用
         readonly List<IComponent> _componentBuffer;
+
         readonly List<int> _indexBuffer;
 
         int _creationIndex;
@@ -124,7 +125,7 @@ namespace Entitas {
             _creationIndex = creationIndex;
             _isEnabled = true;
         }
-
+        ///-是添加现有的，不是新创建一个
         /// Adds a component at the specified index.
         /// You can only have one component at an index.
         /// Each component type must have its own constant index.
@@ -356,7 +357,7 @@ namespace Entitas {
                 ? componentPool.Pop()
                 : (IComponent)Activator.CreateInstance(type);
         }
-
+        
         /// Returns a new or reusable component from the componentPool
         /// for the specified component index.
         public T CreateComponent<T>(int index) where T : new() {
