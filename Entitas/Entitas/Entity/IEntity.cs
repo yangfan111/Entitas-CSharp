@@ -23,7 +23,7 @@ namespace Entitas {
         event EntityComponentChanged OnComponentRemoved;
         event EntityComponentReplaced OnComponentReplaced;
         event EntityEvent OnEntityReleased;
-        event EntityEvent OnDestroyEntity;
+        event EntityEvent OnEntityDestroy;
 
         int totalComponents { get; }
         int creationIndex { get; }

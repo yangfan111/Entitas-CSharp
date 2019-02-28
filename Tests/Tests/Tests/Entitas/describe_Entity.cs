@@ -400,7 +400,7 @@ class describe_Entity : nspec {
 
             it["dispatches OnDestroy when calling Destroy"] = () => {
                 var didDestroy = 0;
-                e.OnDestroyEntity += entity => didDestroy += 1;
+                e.OnEntityDestroy += entity => didDestroy += 1;
                 e.Destroy();
                 didDestroy.should_be(1);
             };

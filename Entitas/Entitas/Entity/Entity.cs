@@ -32,7 +32,7 @@ namespace Entitas {
         /// Occurs when calling entity.Destroy().
         /// All event handlers will be removed when
         /// the entity gets destroyed by the context.
-        public event EntityEvent OnDestroyEntity;
+        public event EntityEvent OnEntityDestroy;
 
         /// The total amount of components an entity can possibly have.
         public int totalComponents { get { return _totalComponents; } }
@@ -405,8 +405,8 @@ namespace Entitas {
                 throw new EntityIsNotEnabledException("Cannot destroy " + this + "!");
             }
 
-            if (OnDestroyEntity != null) {
-                OnDestroyEntity(this);
+            if (OnEntityDestroy != null) {
+                OnEntityDestroy(this);
             }
         }
 
@@ -418,7 +418,7 @@ namespace Entitas {
             OnComponentAdded = null;
             OnComponentReplaced = null;
             OnComponentRemoved = null;
-            OnDestroyEntity = null;
+            OnEntityDestroy = null;
         }
 
         // Do not call this method manually. This method is called by the context.

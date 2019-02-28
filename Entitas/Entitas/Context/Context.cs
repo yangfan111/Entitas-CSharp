@@ -99,7 +99,7 @@ namespace Entitas
         readonly EntityComponentChanged _cachedEntityChanged;
         readonly EntityComponentReplaced _cachedComponentReplaced;
         readonly EntityEvent _cachedEntityReleased;
-        readonly EntityEvent _cachedDestroyEntity;
+        readonly EntityEvent _cachedEntityDestroy;
 
         /// The prefered way to create a context is to use the generated methods
         /// from the code generator, e.g. var context = new GameContext();
@@ -143,7 +143,7 @@ namespace Entitas
             _cachedEntityChanged = updateGroupsComponentAddedOrRemoved;
             _cachedComponentReplaced = updateGroupsComponentReplaced;
             _cachedEntityReleased = onEntityReleased;
-            _cachedDestroyEntity = onDestroyEntity;
+            _cachedEntityDestroy = onDestroyEntity;
         }
 
         ContextInfo createDefaultContextInfo()
@@ -189,7 +189,7 @@ namespace Entitas
             entity.OnComponentRemoved += _cachedEntityChanged;
             entity.OnComponentReplaced += _cachedComponentReplaced;
             entity.OnEntityReleased += _cachedEntityReleased;
-            entity.OnDestroyEntity += _cachedDestroyEntity;
+            entity.OnEntityDestroy += _cachedEntityDestroy;
 
             if (OnEntityCreated != null)
             {
