@@ -83,7 +83,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> UniqueStandard {
         get {
             if (_matcherUniqueStandard == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.UniqueStandard);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.UniqueStandard);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherUniqueStandard = matcher;
             }

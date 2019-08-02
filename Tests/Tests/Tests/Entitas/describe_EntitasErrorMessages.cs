@@ -77,7 +77,7 @@ class describe_EntitasErrorMessages : nspec {
             it["get single entity when multiple exist"] = () => printErrorMessage(() => {
                 ctx.CreateEntity().AddComponentA();
                 ctx.CreateEntity().AddComponentA();
-                var matcher = (Matcher<TestEntity>)Matcher<TestEntity>.AllOf(CID.ComponentA);
+                var matcher = (Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA);
                 matcher.componentNames = ctx.contextInfo.componentNames;
                 var group = ctx.GetGroup(matcher);
                 group.GetSingleEntity();
@@ -87,9 +87,9 @@ class describe_EntitasErrorMessages : nspec {
         context["Collector<TestEntity>"] = () => {
 
             it["unbalanced goups"] = () => printErrorMessage(() => {
-                var g1 = new Group<TestEntity>(Matcher<TestEntity>.AllOf(CID.ComponentA));
-                var g2 = new Group<TestEntity>(Matcher<TestEntity>.AllOf(CID.ComponentB));
-                var e1 = GroupEvent.Added;
+                var g1 = new Group<TestEntity>(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var g2 = new Group<TestEntity>(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
+                var e1 = EGroupEvent.Added;
 
                 new Collector<TestEntity>(new [] { g1, g2 }, new [] { e1 });
             });
@@ -124,8 +124,8 @@ class describe_EntitasErrorMessages : nspec {
             });
 
             it["duplicate entityIndex"] = () => printErrorMessage(() => {
-                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.AllOf(CID.ComponentA));
-                var index = new PrimaryEntityIndex<TestEntity, string>("TestIndex", groupA, (arg1, arg2) => string.Empty);
+                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var index = new PrimaryEntityIndexer<TestEntity, string>("TestIndex", groupA, (arg1, arg2) => string.Empty);
                 ctx.AddEntityIndex(index);
                 ctx.AddEntityIndex(index);
             });
@@ -134,7 +134,7 @@ class describe_EntitasErrorMessages : nspec {
         context["CollectionExtension"] = () => {
 
             it["get single entity when more than one exist"] = () => printErrorMessage(() => {
-                new IEntity[2].SingleEntity();
+                new IEntityExt[2].SingleEntity();
             });
         };
 
@@ -167,14 +167,14 @@ class describe_EntitasErrorMessages : nspec {
         context["EntityIndex"] = () => {
 
             it["no entity with key"] = () => printErrorMessage(() => {
-                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.AllOf(CID.ComponentA));
-                var index = new PrimaryEntityIndex<TestEntity, string>("TestIndex", groupA, (e, c) => ((NameAgeComponent)c).name);
+                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var index = new PrimaryEntityIndexer<TestEntity, string>("TestIndex", groupA, (e, c) => ((NameAgeComponent)c).name);
                 index.GetEntity("unknownKey");
             });
 
             it["multiple entities for primary key"] = () => printErrorMessage(() => {
-                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.AllOf(CID.ComponentA));
-                new PrimaryEntityIndex<TestEntity, string>("TestIndex", groupA, (e, c) => ((NameAgeComponent)c).name);
+                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                new PrimaryEntityIndexer<TestEntity, string>("TestIndex", groupA, (e, c) => ((NameAgeComponent)c).name);
 
                 var nameAge = new NameAgeComponent();
                 nameAge.name = "Max";

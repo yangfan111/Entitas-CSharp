@@ -6,14 +6,14 @@ using Entitas.CodeGeneration.Attributes;
 namespace MyNamespace {
 
     [CustomEntityIndex(typeof(TestContext))]
-    public class CustomEntityIndex : EntityIndex<TestEntity, IntVector2> {
+    public class CustomMutiEntityIndexer : MutiEntityIndexer<TestEntity, IntVector2> {
 
         static readonly List<IntVector2> _cachedList = new List<IntVector2>();
 
-        public CustomEntityIndex(TestContext context)
+        public CustomMutiEntityIndexer(TestContext context)
             : base(
                 "MyCustomEntityIndex",
-                context.GetGroup(Matcher<TestEntity>.AllOf(TestMatcher.Position, TestMatcher.Size)),
+                context.GetGroup(Matcher<TestEntity>.CreateAllOf(TestMatcher.Position, TestMatcher.Size)),
                 (e, c) => {
                     var position = c is PositionComponent ? (PositionComponent)c : e.position;
                     var size = c is SizeComponent ? (SizeComponent)c : e.size;

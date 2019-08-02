@@ -101,7 +101,7 @@ class describe_EntityIndexDataProvider : nspec {
         };
 
         it["creates data for custom entity index class"] = () => {
-            var data = getData<CustomEntityIndex, StandardComponent>();
+            var data = getData<CustomMutiEntityIndexer, StandardComponent>();
 
             data.Length.should_be(1);
             var d = data[0];

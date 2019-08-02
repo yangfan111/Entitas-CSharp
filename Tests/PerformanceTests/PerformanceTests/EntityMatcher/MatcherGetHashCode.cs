@@ -6,7 +6,7 @@ public class MatcherGetHashCode : IPerformanceTest {
     IMatcher<Entity> _m;
 
     public void Before() {
-        _m = Matcher<Entity>.AllOf(new [] {
+        _m = Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentB,
             CP.ComponentC

@@ -57,7 +57,7 @@ public sealed partial class Test2Matcher {
     public static Entitas.IMatcher<Test2Entity> MyNamespaceMultipleEntityIndices {
         get {
             if (_matcherMyNamespaceMultipleEntityIndices == null) {
-                var matcher = (Entitas.Matcher<Test2Entity>)Entitas.Matcher<Test2Entity>.AllOf(Test2ComponentsLookup.MyNamespaceMultipleEntityIndices);
+                var matcher = (Entitas.Matcher<Test2Entity>)Entitas.Matcher<Test2Entity>.CreateAllOf(Test2ComponentsLookup.MyNamespaceMultipleEntityIndices);
                 matcher.componentNames = Test2ComponentsLookup.componentNames;
                 _matcherMyNamespaceMultipleEntityIndices = matcher;
             }

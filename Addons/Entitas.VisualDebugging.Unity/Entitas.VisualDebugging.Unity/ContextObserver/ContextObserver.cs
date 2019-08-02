@@ -32,7 +32,7 @@ namespace Entitas.VisualDebugging.Unity {
             _context.OnGroupCreated -= onGroupCreated;
         }
 
-        void onEntityCreated(IContext context, IEntity entity) {
+        void onEntityCreated(IContext context, IEntityExt entity) {
             var entityBehaviour = _entityBehaviourPool.Count > 0
                 ? _entityBehaviourPool.Pop()
                 : new GameObject().AddComponent<EntityBehaviour>();

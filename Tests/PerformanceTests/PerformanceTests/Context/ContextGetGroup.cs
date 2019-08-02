@@ -10,7 +10,7 @@ public class ContextGetGroup : IPerformanceTest {
     }
 
     public void Run() {
-        var m = Matcher<Entity>.AllOf(new [] { CP.ComponentA });
+        var m = Matcher<Entity>.CreateAllOf(new [] { CP.ComponentA });
         for (int i = 0; i < n; i++) {
             _context.GetGroup(m);
         }

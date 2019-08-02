@@ -9,7 +9,7 @@ class describe_Collector : nspec {
 
         IGroup<TestEntity> groupA = null;
         ICollector<TestEntity> collectorA = null;
-        IMatcher<TestEntity> matcherA = Matcher<TestEntity>.AllOf(CID.ComponentA);
+        IMatcher<TestEntity> matcherA = Matcher<TestEntity>.CreateAllOf(CID.ComponentA);
 
         before = () => {
             _context = new MyTestContext();
@@ -19,7 +19,7 @@ class describe_Collector : nspec {
         context["when observing with GroupEvent.Added"] = () => {
 
             before = () => {
-                collectorA = new Collector<TestEntity>(groupA, GroupEvent.Added);
+                collectorA = new Collector<TestEntity>(groupA, EGroupEvent.Added);
             };
 
             it["is empty when nothing happend"] = () => {
@@ -130,7 +130,7 @@ class describe_Collector : nspec {
         context["when observing with GroupEvent.Removed"] = () => {
 
             before = () => {
-                collectorA = new Collector<TestEntity>(groupA, GroupEvent.Removed);
+                collectorA = new Collector<TestEntity>(groupA, EGroupEvent.Removed);
             };
 
             it["returns collected entities"] = () => {
@@ -147,7 +147,7 @@ class describe_Collector : nspec {
         context["when observing with GroupEvent.AddedOrRemoved"] = () => {
 
             before = () => {
-                collectorA = new Collector<TestEntity>(groupA, GroupEvent.AddedOrRemoved);
+                collectorA = new Collector<TestEntity>(groupA, EGroupEvent.AddedOrRemoved);
             };
 
             it["returns collected entities"] = () => {
@@ -169,15 +169,15 @@ class describe_Collector : nspec {
             IGroup<TestEntity> groupB = null;
 
             before = () => {
-                groupB = _context.GetGroup(Matcher<TestEntity>.AllOf(CID.ComponentB));
+                groupB = _context.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
             };
 
             it["throws when group count != groupEvent count"] = expect<CollectorException>(() => {
                 collectorA = new Collector<TestEntity>(
                     new [] { groupA },
                     new [] {
-                        GroupEvent.Added,
-                        GroupEvent.Added
+                        EGroupEvent.Added,
+                        EGroupEvent.Added
                     }
                 );
             });
@@ -188,8 +188,8 @@ class describe_Collector : nspec {
                     collectorA = new Collector<TestEntity>(
                         new [] { groupA, groupB },
                         new [] {
-                            GroupEvent.Added,
-                            GroupEvent.Added
+                            EGroupEvent.Added,
+                            EGroupEvent.Added
                         }
                     );
                 };
@@ -215,8 +215,8 @@ class describe_Collector : nspec {
                     collectorA = new Collector<TestEntity>(
                         new [] { groupA, groupB },
                         new [] {
-                            GroupEvent.Removed,
-                            GroupEvent.Removed
+                            EGroupEvent.Removed,
+                            EGroupEvent.Removed
                         }
                     );
                 };
@@ -240,8 +240,8 @@ class describe_Collector : nspec {
                     collectorA = new Collector<TestEntity>(
                         new [] { groupA, groupB },
                         new [] {
-                            GroupEvent.AddedOrRemoved,
-                            GroupEvent.AddedOrRemoved
+                            EGroupEvent.AddedOrRemoved,
+                            EGroupEvent.AddedOrRemoved
                         }
                     );
                 };
@@ -269,8 +269,8 @@ class describe_Collector : nspec {
                     collectorA = new Collector<TestEntity>(
                         new [] { groupA, groupB },
                         new [] {
-                            GroupEvent.Added,
-                            GroupEvent.Removed
+                            EGroupEvent.Added,
+                            EGroupEvent.Removed
                         }
                     );
                 };

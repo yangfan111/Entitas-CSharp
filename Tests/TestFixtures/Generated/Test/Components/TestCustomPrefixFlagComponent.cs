@@ -72,7 +72,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> CustomPrefixFlag {
         get {
             if (_matcherCustomPrefixFlag == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.CustomPrefixFlag);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.CustomPrefixFlag);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherCustomPrefixFlag = matcher;
             }

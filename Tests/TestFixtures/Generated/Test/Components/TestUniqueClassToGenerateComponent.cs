@@ -93,7 +93,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> UniqueClassToGenerate {
         get {
             if (_matcherUniqueClassToGenerate == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.UniqueClassToGenerate);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.UniqueClassToGenerate);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherUniqueClassToGenerate = matcher;
             }

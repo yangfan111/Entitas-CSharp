@@ -45,7 +45,7 @@ public sealed partial class Test2Matcher {
     public static Entitas.IMatcher<Test2Entity> Test2AnyEventToGenerateListener {
         get {
             if (_matcherTest2AnyEventToGenerateListener == null) {
-                var matcher = (Entitas.Matcher<Test2Entity>)Entitas.Matcher<Test2Entity>.AllOf(Test2ComponentsLookup.Test2AnyEventToGenerateListener);
+                var matcher = (Entitas.Matcher<Test2Entity>)Entitas.Matcher<Test2Entity>.CreateAllOf(Test2ComponentsLookup.Test2AnyEventToGenerateListener);
                 matcher.componentNames = Test2ComponentsLookup.componentNames;
                 _matcherTest2AnyEventToGenerateListener = matcher;
             }

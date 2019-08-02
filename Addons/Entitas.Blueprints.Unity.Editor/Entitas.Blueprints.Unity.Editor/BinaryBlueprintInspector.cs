@@ -97,7 +97,7 @@ namespace Entitas.Blueprints.Unity.Editor {
         int _contextIndex;
 
         IContext _context;
-        IEntity _entity;
+        IEntityExt _entity;
 
         void Awake() {
             _allContexts = findAllContexts();
@@ -168,7 +168,7 @@ namespace Entitas.Blueprints.Unity.Editor {
             }
             var targetContext = _allContexts[_contextIndex];
             _context = (IContext)Activator.CreateInstance(targetContext.GetType());
-            _entity = (IEntity)_context.GetType().GetMethod("CreateEntity").Invoke(_context, null);
+            _entity = (IEntityExt)_context.GetType().GetMethod("CreateEntity").Invoke(_context, null);
         }
     }
 }

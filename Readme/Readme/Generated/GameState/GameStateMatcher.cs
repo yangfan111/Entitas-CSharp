@@ -9,18 +9,18 @@
 public sealed partial class GameStateMatcher {
 
     public static Entitas.IAllOfMatcher<GameStateEntity> AllOf(params int[] indices) {
-        return Entitas.Matcher<GameStateEntity>.AllOf(indices);
+        return Entitas.Matcher<GameStateEntity>.CreateAllOf(indices);
     }
 
     public static Entitas.IAllOfMatcher<GameStateEntity> AllOf(params Entitas.IMatcher<GameStateEntity>[] matchers) {
-          return Entitas.Matcher<GameStateEntity>.AllOf(matchers);
+          return Entitas.Matcher<GameStateEntity>.CreateAllOf(matchers);
     }
 
     public static Entitas.IAnyOfMatcher<GameStateEntity> AnyOf(params int[] indices) {
-          return Entitas.Matcher<GameStateEntity>.AnyOf(indices);
+          return Entitas.Matcher<GameStateEntity>.CreateAnyOf(indices);
     }
 
     public static Entitas.IAnyOfMatcher<GameStateEntity> AnyOf(params Entitas.IMatcher<GameStateEntity>[] matchers) {
-          return Entitas.Matcher<GameStateEntity>.AnyOf(matchers);
+          return Entitas.Matcher<GameStateEntity>.CreateAnyOf(matchers);
     }
 }

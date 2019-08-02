@@ -7,7 +7,7 @@ public class CollectorActivate : IPerformanceTest {
 
     public void Before() {
         var context = Helper.CreateContext();
-        var group = context.GetGroup(Matcher<Entity>.AllOf(new [] { CP.ComponentA }));
+        var group = context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentA }));
         _collector = group.CreateCollector();
     }
 

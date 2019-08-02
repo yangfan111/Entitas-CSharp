@@ -45,7 +45,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> NewCustomNameComponent1 {
         get {
             if (_matcherNewCustomNameComponent1 == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.NewCustomNameComponent1);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.NewCustomNameComponent1);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherNewCustomNameComponent1 = matcher;
             }

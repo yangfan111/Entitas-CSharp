@@ -1,17 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Entitas {
 
-    public class EntityEqualityComparer<TEntity> : IEqualityComparer<TEntity> where TEntity : class, IEntity {
+    public class EntityEqualityComparer<T> : IEqualityComparer<T> where T:IEntityExt {
 
-        public static readonly IEqualityComparer<TEntity> comparer = new EntityEqualityComparer<TEntity>();
+        public static readonly EntityEqualityComparer<T> Comparer = new EntityEqualityComparer<T>();
 
-        public bool Equals(TEntity x, TEntity y) {
+    
+        public bool Equals(EntityExt x, EntityExt y)
+        {
             return x == y;
         }
 
-        public int GetHashCode(TEntity obj) {
-            return obj.creationIndex;
+        public int GetHashCode(EntityExt obj)
+        {
+            return obj.CreationIndex;
+        }
+
+        public bool Equals(T x, T y)
+        {
+          return  Object.Equals(x, y);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            return obj.CreationIndex;
         }
     }
 }

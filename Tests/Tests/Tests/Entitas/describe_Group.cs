@@ -31,7 +31,7 @@ class describe_Group : nspec {
         TestEntity eA2 = null;
 
         before = () => {
-            _groupA = new Group<TestEntity>(Matcher<TestEntity>.AllOf(CID.ComponentA));
+            _groupA = new Group<TestEntity>(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
             eA1 = this.CreateEntity().AddComponentA();
             eA2 = this.CreateEntity().AddComponentA();
         };
@@ -92,7 +92,7 @@ class describe_Group : nspec {
 
             it["enumerates group"] = () => {
                 var i = 0;
-                IEntity e = null;
+                IEntityExt e = null;
                 foreach (var entity in _groupA) {
                     i++;
                     e = entity;
@@ -164,7 +164,7 @@ class describe_Group : nspec {
                     component.should_be_same(Component.A);
                 };
                 _groupA.OnEntityRemoved += delegate { this.Fail(); };
-                _groupA.OnEntityUpdated += delegate { this.Fail(); };
+                _groupA.OnEntityUpdatedWithCmp += delegate { this.Fail(); };
 
                 handleAddEA(eA1);
                 didDispatch.should_be(1);
@@ -174,7 +174,7 @@ class describe_Group : nspec {
                 handleAddEA(eA1);
                 _groupA.OnEntityAdded += delegate { this.Fail(); };
                 _groupA.OnEntityRemoved += delegate { this.Fail(); };
-                _groupA.OnEntityUpdated += delegate { this.Fail(); };
+                _groupA.OnEntityUpdatedWithCmp += delegate { this.Fail(); };
                 handleAddEA(eA1);
                 didDispatch.should_be(0);
             };
@@ -183,7 +183,7 @@ class describe_Group : nspec {
                 var e = this.CreateEntity().AddComponentB();
                 _groupA.OnEntityAdded += delegate { this.Fail(); };
                 _groupA.OnEntityRemoved += delegate { this.Fail(); };
-                _groupA.OnEntityUpdated += delegate { this.Fail(); };
+                _groupA.OnEntityUpdatedWithCmp += delegate { this.Fail(); };
                 handleAddEB(e);
             };
 
@@ -197,7 +197,7 @@ class describe_Group : nspec {
                     component.should_be_same(Component.A);
                 };
                 _groupA.OnEntityAdded += delegate { this.Fail(); };
-                _groupA.OnEntityUpdated += delegate { this.Fail(); };
+                _groupA.OnEntityUpdatedWithCmp += delegate { this.Fail(); };
 
                 eA1.RemoveComponentA();
                 handleRemoveEA(eA1, Component.A);
@@ -233,7 +233,7 @@ class describe_Group : nspec {
                     index.should_be(CID.ComponentA);
                     component.should_be_same(newComponentA);
                 };
-                _groupA.OnEntityUpdated += (group, entity, index, previousComponent, newComponent) => {
+                _groupA.OnEntityUpdatedWithCmp += (group, entity, index, previousComponent, newComponent) => {
                     updated += 1;
                     group.should_be(_groupA);
                     entity.should_be(eA1);
@@ -252,14 +252,14 @@ class describe_Group : nspec {
             it["doesn't dispatch OnEntityRemoved and OnEntityAdded when updating when group doesn't contain entity"] = () => {
                 _groupA.OnEntityRemoved += delegate { this.Fail(); };
                 _groupA.OnEntityAdded += delegate { this.Fail(); };
-                _groupA.OnEntityUpdated += delegate { this.Fail(); };
+                _groupA.OnEntityUpdatedWithCmp += delegate { this.Fail(); };
                 updateEA(eA1, new ComponentA());
             };
 
             it["removes all event handlers"] = () => {
                 _groupA.OnEntityAdded += delegate { this.Fail(); };
                 _groupA.OnEntityRemoved += delegate { this.Fail(); };
-                _groupA.OnEntityUpdated += delegate { this.Fail(); };
+                _groupA.OnEntityUpdatedWithCmp += delegate { this.Fail(); };
 
                 _groupA.RemoveAllEventHandlers();
 
@@ -279,7 +279,7 @@ class describe_Group : nspec {
 
             context["GetEntities()"] = () => {
 
-                IEntity[] cache = null;
+                IEntityExt[] cache = null;
 
                 before = () => {
                     handleSilently(eA1);
@@ -321,7 +321,7 @@ class describe_Group : nspec {
 
             context["SingleEntity()"] = () => {
 
-                IEntity cache = null;
+                IEntityExt cache = null;
 
                 before = () => {
                     handleSilently(eA1);
@@ -435,7 +435,7 @@ class describe_Group : nspec {
         };
 
         it["can ToString"] = () => {
-            var m = Matcher<TestEntity>.AllOf(Matcher<TestEntity>.AllOf(0), Matcher<TestEntity>.AllOf(1));
+            var m = Matcher<TestEntity>.CreateAllOf(Matcher<TestEntity>.CreateAllOf(0), Matcher<TestEntity>.CreateAllOf(1));
             var group = new Group<TestEntity>(m);
             group.ToString().should_be("Group(AllOf(0, 1))");
         };
@@ -446,7 +446,7 @@ class describe_Group : nspec {
     }
 
     void handle(TestEntity entity, int index, IComponent component) {
-        _groupA.HandleEntity(entity, index, component);
+        _groupA.HandleEntityNotifyOutside(entity, index, component);
     }
 
     void handleAddEA(TestEntity entity) {

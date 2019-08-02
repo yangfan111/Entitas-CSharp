@@ -83,7 +83,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> MyNamespaceUniqueMyNamespace {
         get {
             if (_matcherMyNamespaceUniqueMyNamespace == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.MyNamespaceUniqueMyNamespace);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.MyNamespaceUniqueMyNamespace);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherMyNamespaceUniqueMyNamespace = matcher;
             }

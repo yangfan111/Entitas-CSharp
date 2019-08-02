@@ -25,7 +25,7 @@ namespace Entitas.Blueprints.Unity {
             return blueprint;
         }
 
-        public void Serialize(IEntity entity) {
+        public void Serialize(IEntityExt entity) {
             var blueprint = new Blueprint(entity.contextInfo.name, name, entity);
             Serialize(blueprint);
         }

@@ -4,27 +4,27 @@ public class EntityRemoveAddComponent : IPerformanceTest {
 
     const int n = 1000000;
     IContext<Entity> _context;
-    IEntity _e;
+    IEntityExt _e;
     ComponentA _componentA;
 
     public void Before() {
         _context = Helper.CreateContext();
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] { CP.ComponentA }));
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] { CP.ComponentB }));
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] { CP.ComponentC }));
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] {
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentA }));
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentB }));
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentC }));
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentB
         }));
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] {
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentC
         }));
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] {
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentB,
             CP.ComponentC
         }));
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] {
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentB,
             CP.ComponentC

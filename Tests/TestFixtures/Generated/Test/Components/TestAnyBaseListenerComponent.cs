@@ -45,7 +45,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> AnyBaseListener {
         get {
             if (_matcherAnyBaseListener == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.AnyBaseListener);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.AnyBaseListener);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherAnyBaseListener = matcher;
             }

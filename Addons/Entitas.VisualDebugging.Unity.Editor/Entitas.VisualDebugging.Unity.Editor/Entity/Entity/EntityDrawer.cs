@@ -11,7 +11,7 @@ namespace Entitas.VisualDebugging.Unity.Editor
 {
     public static partial class EntityDrawer
     {
-        public static void DrawEntity(IEntity entity)
+        public static void DrawEntity(IEntityExt entity)
         {
             var bgColor = GUI.backgroundColor;
             GUI.backgroundColor = Color.red;
@@ -51,7 +51,7 @@ namespace Entitas.VisualDebugging.Unity.Editor
             }
         }
 
-        public static void DrawMultipleEntities(IEntity[] entities)
+        public static void DrawMultipleEntities(IEntityExt[] entities)
         {
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
@@ -107,7 +107,7 @@ namespace Entitas.VisualDebugging.Unity.Editor
             }
         }
 
-        public static void DrawComponents(IEntity entity)
+        public static void DrawComponents(IEntityExt entity)
         {
             var unfoldedComponents = getUnfoldedComponents(entity);
             var componentMemberSearch = getComponentMemberSearch(entity);
@@ -161,7 +161,7 @@ namespace Entitas.VisualDebugging.Unity.Editor
             EditorLayout.EndVerticalBox();
         }
 
-        public static void DrawComponent(bool[] unfoldedComponents, string[] componentMemberSearch, IEntity entity, int index, IComponent component)
+        public static void DrawComponent(bool[] unfoldedComponents, string[] componentMemberSearch, IEntityExt entity, int index, IComponent component)
         {
             var componentType = component.GetType();
             var componentName = componentType.Name.RemoveComponentSuffix();
@@ -379,7 +379,7 @@ namespace Entitas.VisualDebugging.Unity.Editor
             return false;
         }
 
-        static int drawAddComponentMenu(IEntity entity)
+        static int drawAddComponentMenu(IEntityExt entity)
         {
             var componentInfos = getComponentInfos(entity)
                 .Where(info => !entity.HasComponent(info.index))

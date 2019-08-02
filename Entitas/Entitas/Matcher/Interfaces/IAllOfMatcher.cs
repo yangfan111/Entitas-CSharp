@@ -1,8 +1,16 @@
 ﻿namespace Entitas {
 
-    public interface IAllOfMatcher<TEntity> : IAnyOfMatcher<TEntity> where TEntity : class, IEntity {
+    public interface IAllOfMatcher<TEntity> : IMatcher<TEntity> where TEntity : class, IEntityExt {
 
-        IAnyOfMatcher<TEntity> AnyOf(params int[] indices);
-        IAnyOfMatcher<TEntity> AnyOf(params IMatcher<TEntity>[] matchers);
+        IMatcher<TEntity> NoneOf(params int[] indices);
+        IMatcher<TEntity> NoneOf(params IMatcher<TEntity>[] matchers);
+        
+        IMatcher<TEntity> AnyOf(params int[] indices);
+        IMatcher<TEntity> AnyOf(params IMatcher<TEntity>[] matchers);
+        
+        int[] AllOfIndices  { get; }
+        int[] AnyOfIndices  { get; }
+        int[] NoneOfIndices { get; }
+        
     }
 }

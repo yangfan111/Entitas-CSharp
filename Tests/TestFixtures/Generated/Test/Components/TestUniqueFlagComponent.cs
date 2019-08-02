@@ -72,7 +72,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> UniqueFlag {
         get {
             if (_matcherUniqueFlag == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.UniqueFlag);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.UniqueFlag);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherUniqueFlag = matcher;
             }

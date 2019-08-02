@@ -36,16 +36,24 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entitas\Context\ContextExt.cs" />
+    <Compile Include="Entitas\Context\ContextUtil.cs" />
+    <Compile Include="Entitas\EntityIndex\AbstractEntityIndexer.cs" />
+    <Compile Include="Entitas\EntityIndex\IEntityIndex.cs" />
+    <Compile Include="Entitas\Entity\EntityExt.cs" />
+    <Compile Include="Entitas\Entity\EntityExtUtil.cs" />
+    <Compile Include="Entitas\FrameworkUtil.cs" />
+    <Compile Include="Entitas\Group\GroupExt.cs" />
+    <Compile Include="Entitas\Legacy\legacyAbstractEntityIndex.cs" />
+    <Compile Include="Entitas\Legacy\legacyContext.cs" />
+    <Compile Include="Entitas\Legacy\legacyGroup.cs" />
+    <Compile Include="Entitas\Matcher\Interfaces\IAllOfMatcher.cs" />
     <Compile Include="Entitas\Matcher\Matcher.cs" />
     <Compile Include="Entitas\Matcher\MatcherToString.cs" />
     <Compile Include="Entitas\Matcher\MatcherEquals.cs" />
-    <Compile Include="Entitas\Matcher\MatcherStatic.cs" />
-    <Compile Include="Entitas\EntityIndex\EntityIndex.cs" />
-    <Compile Include="Entitas\EntityIndex\AbstractEntityIndex.cs" />
-    <Compile Include="Entitas\EntityIndex\PrimaryEntityIndex.cs" />
-    <Compile Include="Entitas\Entity\Entity.cs" />
-    <Compile Include="Entitas\Group\Group.cs" />
-    <Compile Include="Entitas\Context\Context.cs" />
+    <Compile Include="Entitas\Matcher\MatcherCreator.cs" />
+    <Compile Include="Entitas\EntityIndex\MutiEntityIndexer.cs" />
+    <Compile Include="Entitas\EntityIndex\PrimaryEntityIndexer.cs" />
     <Compile Include="Entitas\Systems\JobSystem.cs" />
     <Compile Include="Entitas\Systems\Systems.cs" />
     <Compile Include="Entitas\Systems\ReactiveSystem.cs" />
@@ -77,12 +85,9 @@
     <Compile Include="Entitas\Entity\SafeAERC.cs" />
     <Compile Include="Entitas\ContextInfo.cs" />
     <Compile Include="Entitas\EntitasException.cs" />
-    <Compile Include="Entitas\Context\IContext.cs" />
     <Compile Include="Entitas\Entity\IAERC.cs" />
     <Compile Include="Entitas\IComponent.cs" />
     <Compile Include="Entitas\Context\IContexts.cs" />
-    <Compile Include="Entitas\Entity\IEntity.cs" />
-    <Compile Include="Entitas\EntityIndex\IEntityIndex.cs" />
     <Compile Include="Entitas\Group\IGroup.cs" />
     <Compile Include="Entitas\Systems\Interfaces\ICleanupSystem.cs" />
     <Compile Include="Entitas\Systems\Interfaces\IExecuteSystem.cs" />
@@ -90,11 +95,7 @@
     <Compile Include="Entitas\Systems\Interfaces\IReactiveSystem.cs" />
     <Compile Include="Entitas\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Entitas\Systems\Interfaces\ITearDownSystem.cs" />
-    <Compile Include="Entitas\Matcher\Interfaces\IAllOfMatcher.cs" />
-    <Compile Include="Entitas\Matcher\Interfaces\IAnyOfMatcher.cs" />
-    <Compile Include="Entitas\Matcher\Interfaces\ICompoundMatcher.cs" />
     <Compile Include="Entitas\Matcher\Interfaces\IMatcher.cs" />
-    <Compile Include="Entitas\Matcher\Interfaces\INoneOfMatcher.cs" />
     <Compile Include="Entitas\Collector\TriggerOnEvent.cs" />
     <Compile Include="Entitas\Collector\CollectorContextExtension.cs" />
     <Compile Include="Entitas\Collector\TriggerOnEventMatcherExtension.cs" />

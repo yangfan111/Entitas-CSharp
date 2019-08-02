@@ -12,7 +12,7 @@ namespace Entitas.Blueprints {
         public Blueprint() {
         }
 
-        public Blueprint(string contextIdentifier, string name, IEntity entity) {
+        public Blueprint(string contextIdentifier, string name, IEntityExt entity) {
             this.contextIdentifier = contextIdentifier;
             this.name = name;
 

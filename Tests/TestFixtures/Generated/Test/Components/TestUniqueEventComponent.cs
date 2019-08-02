@@ -83,7 +83,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> UniqueEvent {
         get {
             if (_matcherUniqueEvent == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.UniqueEvent);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.UniqueEvent);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherUniqueEvent = matcher;
             }

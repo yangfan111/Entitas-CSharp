@@ -5,12 +5,12 @@ namespace Entitas.Unity {
 
     public class EntityLink : MonoBehaviour {
 
-        public IEntity entity { get { return _entity; } }
+        public IEntityExt entity { get { return _entity; } }
 
-        IEntity _entity;
+        IEntityExt _entity;
         bool _applicationIsQuitting;
 
-        public void Link(IEntity entity) {
+        public void Link(IEntityExt entity) {
             if (_entity != null) {
                 throw new Exception("EntityLink is already linked to " + _entity + "!");
             }
@@ -51,7 +51,7 @@ namespace Entitas.Unity {
             return gameObject.GetComponent<EntityLink>();
         }
 
-        public static EntityLink Link(this GameObject gameObject, IEntity entity) {
+        public static EntityLink Link(this GameObject gameObject, IEntityExt entity) {
             var link = gameObject.GetEntityLink();
             if (link == null) {
                 link = gameObject.AddComponent<EntityLink>();

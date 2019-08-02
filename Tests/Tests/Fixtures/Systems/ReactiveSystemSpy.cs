@@ -7,7 +7,7 @@ public interface IReactiveSystemSpy {
     int didExecute { get; }
     int didCleanup { get; }
     int didTearDown { get; }
-    IEntity[] entities { get; }
+    IEntityExt[] entities { get; }
 }
 
 public class ReactiveSystemSpy : ReactiveSystem<TestEntity>, IReactiveSystemSpy, IInitializeSystem, ICleanupSystem, ITearDownSystem {
@@ -16,7 +16,7 @@ public class ReactiveSystemSpy : ReactiveSystem<TestEntity>, IReactiveSystemSpy,
     public int didExecute { get { return _didExecute; } }
     public int didCleanup { get { return _didCleanup; } }
     public int didTearDown { get { return _didTearDown; } }
-    public IEntity[] entities { get { return _entities; } }
+    public IEntityExt[] entities { get { return _entities; } }
 
     public Action<List<TestEntity>> executeAction;
 
@@ -24,14 +24,14 @@ public class ReactiveSystemSpy : ReactiveSystem<TestEntity>, IReactiveSystemSpy,
     protected int _didExecute;
     protected int _didCleanup;
     protected int _didTearDown;
-    protected IEntity[] _entities;
+    protected IEntityExt[] _entities;
 
     readonly Func<TestEntity, bool> _filter;
 
     public ReactiveSystemSpy(ICollector<TestEntity> collector) : base(collector) {
     }
 
-    public ReactiveSystemSpy(ICollector<TestEntity> collector, Func<IEntity, bool> filter) : this(collector) {
+    public ReactiveSystemSpy(ICollector<TestEntity> collector, Func<IEntityExt, bool> filter) : this(collector) {
         _filter = filter;
     }
 

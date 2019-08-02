@@ -45,7 +45,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> MyNamespaceMyNamespaceFlag {
         get {
             if (_matcherMyNamespaceMyNamespaceFlag == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.MyNamespaceMyNamespaceFlag);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.MyNamespaceMyNamespaceFlag);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherMyNamespaceMyNamespaceFlag = matcher;
             }

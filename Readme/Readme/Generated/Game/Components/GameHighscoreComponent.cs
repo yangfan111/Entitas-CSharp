@@ -83,7 +83,7 @@ public sealed partial class GameMatcher {
     public static Entitas.IMatcher<GameEntity> Highscore {
         get {
             if (_matcherHighscore == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Highscore);
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.CreateAllOf(GameComponentsLookup.Highscore);
                 matcher.componentNames = GameComponentsLookup.componentNames;
                 _matcherHighscore = matcher;
             }

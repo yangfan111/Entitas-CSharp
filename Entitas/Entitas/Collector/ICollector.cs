@@ -10,10 +10,10 @@ namespace Entitas {
         void Deactivate();
         void ClearCollectedEntities();
 
-        IEnumerable<TCast> GetCollectedEntities<TCast>() where TCast : class, IEntity;
+        IEnumerable<TCast> GetCollectedEntities<TCast>() where TCast : class, IEntityExt;
     }
 
-    public interface ICollector<TEntity> : ICollector where TEntity : class, IEntity {
+    public interface ICollector<TEntity> : ICollector where TEntity : class, IEntityExt {
 
         HashSet<TEntity> collectedEntities { get; }
     }

@@ -45,7 +45,7 @@ public sealed partial class TestMatcher {
     public static Entitas.IMatcher<TestEntity> MixedEvent {
         get {
             if (_matcherMixedEvent == null) {
-                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.AllOf(TestComponentsLookup.MixedEvent);
+                var matcher = (Entitas.Matcher<TestEntity>)Entitas.Matcher<TestEntity>.CreateAllOf(TestComponentsLookup.MixedEvent);
                 matcher.componentNames = TestComponentsLookup.componentNames;
                 _matcherMixedEvent = matcher;
             }

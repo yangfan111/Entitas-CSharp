@@ -8,7 +8,7 @@ class describe_CustomEntityIndex : nspec {
 
         it["sets entity to multiple keys"] = () => {
             var ctx = new TestContext();
-            var index = new CustomEntityIndex(ctx);
+            var index = new CustomMutiEntityIndexer(ctx);
 
             var e = ctx.CreateEntity();
             e.AddPosition(2, 3);

@@ -6,11 +6,11 @@ public class EntityIndexGetEntity : IPerformanceTest {
 
     IContext<Entity> _context;
 
-    PrimaryEntityIndex<Entity, string> _index;
+    PrimaryEntityIndexer<Entity, string> _indexer;
 
     public void Before() {
         _context = Helper.CreateContext();
-        _index = new PrimaryEntityIndex<Entity, string>("TestIndex", _context.GetGroup(Matcher<Entity>.AllOf(CP.ComponentA)), (e, c) => ((NameComponent)c).name);
+        _indexer = new PrimaryEntityIndexer<Entity, string>("TestIndex", _context.GetGroup(Matcher<Entity>.CreateAllOf(CP.ComponentA)), (e, c) => ((NameComponent)c).name);
 
         for (int i = 0; i < 10; i++) {
             var nameComponent = new NameComponent();
@@ -22,7 +22,7 @@ public class EntityIndexGetEntity : IPerformanceTest {
     public void Run() {
         var name = 9.ToString();
         for (int i = 0; i < n; i++) {
-            _index.GetEntity(name);
+            _indexer.GetEntity(name);
         }
     }
 }

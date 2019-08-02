@@ -83,7 +83,7 @@ public sealed partial class GameStateMatcher {
     public static Entitas.IMatcher<GameStateEntity> Score {
         get {
             if (_matcherScore == null) {
-                var matcher = (Entitas.Matcher<GameStateEntity>)Entitas.Matcher<GameStateEntity>.AllOf(GameStateComponentsLookup.Score);
+                var matcher = (Entitas.Matcher<GameStateEntity>)Entitas.Matcher<GameStateEntity>.CreateAllOf(GameStateComponentsLookup.Score);
                 matcher.componentNames = GameStateComponentsLookup.componentNames;
                 _matcherScore = matcher;
             }

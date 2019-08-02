@@ -42,7 +42,7 @@ class describe_Matcher : nspec {
 
             IAllOfMatcher<TestEntity> m = null;
 
-            before = () => m = Matcher<TestEntity>.AllOf(CID.ComponentA, CID.ComponentB);
+            before = () => m = Matcher<TestEntity>.CreateAllOf(CID.ComponentA, CID.ComponentB);
 
             it["has all indices"] = () => {
                 assertIndicesContain(m.indices, CID.ComponentA, CID.ComponentB);
@@ -50,7 +50,7 @@ class describe_Matcher : nspec {
             };
 
             it["has all indices without duplicates"] = () => {
-                m = Matcher<TestEntity>.AllOf(new [] {
+                m = Matcher<TestEntity>.CreateAllOf(new [] {
                     CID.ComponentA,
                     CID.ComponentA,
                     CID.ComponentB,
@@ -68,26 +68,26 @@ class describe_Matcher : nspec {
             };
 
             it["merges matchers to new matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentC });
-                var mergedMatcher = Matcher<TestEntity>.AllOf(m1, m2, m3);
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentC });
+                var mergedMatcher = Matcher<TestEntity>.CreateAllOf(m1, m2, m3);
                 assertIndicesContain(mergedMatcher.indices, CID.ComponentA, CID.ComponentB, CID.ComponentC);
                 assertIndicesContain(mergedMatcher.allOfIndices, CID.ComponentA, CID.ComponentB, CID.ComponentC);
             };
 
             it["merges matchers to new matcher without duplicates"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m3 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
-                var mergedMatcher = Matcher<TestEntity>.AllOf(m1, m2, m3);
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m3 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
+                var mergedMatcher = Matcher<TestEntity>.CreateAllOf(m1, m2, m3);
                 assertIndicesContain(mergedMatcher.indices, CID.ComponentA, CID.ComponentB);
                 assertIndicesContain(mergedMatcher.allOfIndices, CID.ComponentA, CID.ComponentB);
             };
 
             it["throws when merging matcher with more than one index"] = expect<MatcherException>(() => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA, CID.ComponentB });
-                Matcher<TestEntity>.AllOf(m1);
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA, CID.ComponentB });
+                Matcher<TestEntity>.CreateAllOf(m1);
             });
 
             it["can ToString"] = () => m.ToString().should_be("AllOf(1, 2)");
@@ -99,13 +99,13 @@ class describe_Matcher : nspec {
             };
 
             it["uses componentNames when merged matcher ToString"] = () => {
-                var m1 = (Matcher<TestEntity>)Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = (Matcher<TestEntity>)Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
-                var m3 = (Matcher<TestEntity>)Matcher<TestEntity>.AllOf(new [] { CID.ComponentC });
+                var m1 = (Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = (Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
+                var m3 = (Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentC });
 
                 m2.componentNames = new [] { "m_0", "m_1", "m_2", "m_3" };
 
-                var mergedMatcher = Matcher<TestEntity>.AllOf(m1, m2, m3);
+                var mergedMatcher = Matcher<TestEntity>.CreateAllOf(m1, m2, m3);
                 mergedMatcher.ToString().should_be("AllOf(m_1, m_2, m_3)");
             };
         };
@@ -114,13 +114,13 @@ class describe_Matcher : nspec {
 
             IAnyOfMatcher<TestEntity> m = null;
 
-            before = () => m = Matcher<TestEntity>.AnyOf(new [] {
+            before = () => m = Matcher<TestEntity>.CreateAnyOf(new [] {
                 CID.ComponentA,
                 CID.ComponentB
             });
 
             it["has all indices"] = () => {
-                m = Matcher<TestEntity>.AnyOf(new [] {
+                m = Matcher<TestEntity>.CreateAnyOf(new [] {
                     CID.ComponentA,
                     CID.ComponentB
                 });
@@ -129,7 +129,7 @@ class describe_Matcher : nspec {
             };
 
             it["has all indices without duplicates"] = () => {
-                m = Matcher<TestEntity>.AnyOf(new [] {
+                m = Matcher<TestEntity>.CreateAnyOf(new [] {
                     CID.ComponentA,
                     CID.ComponentA,
                     CID.ComponentB,
@@ -148,26 +148,26 @@ class describe_Matcher : nspec {
             };
 
             it["merges matchers to new matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentC });
-                var mergedMatcher = Matcher<TestEntity>.AnyOf(m1, m2, m3);
+                var m1 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentC });
+                var mergedMatcher = Matcher<TestEntity>.CreateAnyOf(m1, m2, m3);
                 assertIndicesContain(mergedMatcher.indices, CID.ComponentA, CID.ComponentB, CID.ComponentC);
                 assertIndicesContain(mergedMatcher.anyOfIndices, CID.ComponentA, CID.ComponentB, CID.ComponentC);
             };
 
             it["merges matchers to new matcher without duplicates"] = () => {
-                var m1 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentB });
-                var mergedMatcher = Matcher<TestEntity>.AnyOf(m1, m2, m3);
+                var m1 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentB });
+                var mergedMatcher = Matcher<TestEntity>.CreateAnyOf(m1, m2, m3);
                 assertIndicesContain(mergedMatcher.indices, CID.ComponentA, CID.ComponentB);
                 assertIndicesContain(mergedMatcher.anyOfIndices, CID.ComponentA, CID.ComponentB);
             };
 
             it["throws when merging matcher with more than one index"] = expect<MatcherException>(() => {
-                var m1 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentA, CID.ComponentB });
-                Matcher<TestEntity>.AnyOf(m1);
+                var m1 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentA, CID.ComponentB });
+                Matcher<TestEntity>.CreateAnyOf(m1);
             });
 
             it["can ToString"] = () => m.ToString().should_be("AnyOf(1, 2)");
@@ -177,7 +177,7 @@ class describe_Matcher : nspec {
 
             ICompoundMatcher<TestEntity> m = null;
 
-            before = () => m = Matcher<TestEntity>.AllOf(new [] {
+            before = () => m = Matcher<TestEntity>.CreateAllOf(new [] {
                 CID.ComponentA,
                 CID.ComponentB
             }).NoneOf(CID.ComponentC, CID.ComponentD);
@@ -189,7 +189,7 @@ class describe_Matcher : nspec {
             };
 
             it["has all indices without duplicates"] = () => {
-                m = Matcher<TestEntity>.AllOf(new [] {
+                m = Matcher<TestEntity>.CreateAllOf(new [] {
                     CID.ComponentA,
                     CID.ComponentA,
                     CID.ComponentB
@@ -204,7 +204,7 @@ class describe_Matcher : nspec {
             it["matches"] = () => m.Matches(eAB).should_be_true();
 
             it["mutates existing matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
                 var m2 = m1.NoneOf(new [] { CID.ComponentB });
                 m1.should_be_same(m2);
                 assertIndicesContain(m1.indices, CID.ComponentA, CID.ComponentB);
@@ -213,9 +213,9 @@ class describe_Matcher : nspec {
             };
 
             it["mutates existing merged matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AllOf(m1);
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAllOf(m1);
                 var m4 = m3.NoneOf(m2);
                 m3.should_be_same(m4);
                 assertIndicesContain(m3.indices, CID.ComponentA, CID.ComponentB);
@@ -236,7 +236,7 @@ class describe_Matcher : nspec {
 
             ICompoundMatcher<TestEntity> m = null;
 
-            before = () => m = Matcher<TestEntity>.AnyOf(new [] {
+            before = () => m = Matcher<TestEntity>.CreateAnyOf(new [] {
                 CID.ComponentA,
                 CID.ComponentB
             }).NoneOf(CID.ComponentC, CID.ComponentD);
@@ -248,7 +248,7 @@ class describe_Matcher : nspec {
             };
 
             it["has all indices without duplicates"] = () => {
-                m = Matcher<TestEntity>.AnyOf(new [] {
+                m = Matcher<TestEntity>.CreateAnyOf(new [] {
                     CID.ComponentA,
                     CID.ComponentA,
                     CID.ComponentB
@@ -264,7 +264,7 @@ class describe_Matcher : nspec {
             it["matches"] = () => m.Matches(eB).should_be_true();
 
             it["mutates existing matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentA });
+                var m1 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentA });
                 var m2 = m1.NoneOf(new [] { CID.ComponentB });
                 m1.should_be_same(m2);
                 assertIndicesContain(m1.indices, CID.ComponentA, CID.ComponentB);
@@ -273,9 +273,9 @@ class describe_Matcher : nspec {
             };
 
             it["mutates existing merged matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AnyOf(m1);
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAnyOf(m1);
                 var m4 = m3.NoneOf(m2);
                 m3.should_be_same(m4);
                 assertIndicesContain(m3.indices, CID.ComponentA, CID.ComponentB);
@@ -290,7 +290,7 @@ class describe_Matcher : nspec {
 
             ICompoundMatcher<TestEntity> m = null;
 
-            before = () => m = Matcher<TestEntity>.AllOf(new [] {
+            before = () => m = Matcher<TestEntity>.CreateAllOf(new [] {
                 CID.ComponentA,
                 CID.ComponentB
             }).AnyOf(CID.ComponentC, CID.ComponentD);
@@ -302,7 +302,7 @@ class describe_Matcher : nspec {
             };
 
             it["has all indices without duplicates"] = () => {
-                m = Matcher<TestEntity>.AllOf(new [] {
+                m = Matcher<TestEntity>.CreateAllOf(new [] {
                     CID.ComponentA,
                     CID.ComponentA,
                     CID.ComponentB
@@ -317,7 +317,7 @@ class describe_Matcher : nspec {
             it["matches"] = () => m.Matches(eABC).should_be_true();
 
             it["mutates existing matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
                 var m2 = m1.AnyOf(new [] { CID.ComponentB });
                 m1.should_be_same(m2);
                 assertIndicesContain(m1.indices, CID.ComponentA, CID.ComponentB);
@@ -326,9 +326,9 @@ class describe_Matcher : nspec {
             };
 
             it["mutates existing merged matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AllOf(m1);
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAllOf(m1);
                 var m4 = m3.AnyOf(m2);
                 m3.should_be_same(m4);
                 assertIndicesContain(m3.indices, CID.ComponentA, CID.ComponentB);
@@ -342,14 +342,14 @@ class describe_Matcher : nspec {
         context["indices cache"] = () => {
 
             it["updates cache when calling AnyOf"] = () => {
-                var m = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
+                var m = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
                 var cache = m.indices;
                 m.AnyOf(new [] { CID.ComponentB });
                 m.indices.should_not_be_same(cache);
             };
 
             it["updates cache when calling NoneOf"] = () => {
-                var m = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
+                var m = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
                 var cache = m.indices;
                 m.NoneOf(new [] { CID.ComponentB });
                 m.indices.should_not_be_same(cache);
@@ -389,17 +389,17 @@ class describe_Matcher : nspec {
             };
 
             it["equals merged matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
                 var m3 = allOfBA();
 
-                var mergedMatcher = Matcher<TestEntity>.AllOf(m1, m2);
+                var mergedMatcher = Matcher<TestEntity>.CreateAllOf(m1, m2);
                 mergedMatcher.Equals(m3).should_be_true();
                 mergedMatcher.GetHashCode().should_be(m3.GetHashCode());
             };
 
             it["doesn't equal different AllOfMatcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] {
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] {
                     CID.ComponentA
                 });
                 var m2 = allOfAB();
@@ -409,27 +409,27 @@ class describe_Matcher : nspec {
             };
 
             it["allOf doesn't equal anyOf with same indices"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentA });
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentA });
                 m1.Equals(m2).should_be_false();
                 m1.GetHashCode().should_not_be(m2.GetHashCode());
             };
 
             it["doesn't equal differnt type matchers with same indices"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentB });
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB });
 
-                var m3 = Matcher<TestEntity>.AllOf(m1, m2);
-                var m4 = Matcher<TestEntity>.AnyOf(m1, m2);
+                var m3 = Matcher<TestEntity>.CreateAllOf(m1, m2);
+                var m4 = Matcher<TestEntity>.CreateAnyOf(m1, m2);
                 m3.Equals(m4).should_be_false();
                 m3.GetHashCode().should_not_be(m4.GetHashCode());
             };
 
             it["equals compound matcher"] = () => {
-                var m1 = Matcher<TestEntity>.AllOf(new [] { CID.ComponentA });
-                var m2 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentB });
-                var m3 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentC });
-                var m4 = Matcher<TestEntity>.AnyOf(new [] { CID.ComponentD });
+                var m1 = Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA });
+                var m2 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentB });
+                var m3 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentC });
+                var m4 = Matcher<TestEntity>.CreateAnyOf(new [] { CID.ComponentD });
 
                 var mX = Matcher<TestEntity>.AllOf(m1, m2).AnyOf(m3, m4);
                 var mY = Matcher<TestEntity>.AllOf(m1, m2).AnyOf(m3, m4);
@@ -441,10 +441,10 @@ class describe_Matcher : nspec {
     }
 
     static IAllOfMatcher<TestEntity> allOfAB() {
-        return Matcher<TestEntity>.AllOf(new [] { CID.ComponentA, CID.ComponentB });
+        return Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentA, CID.ComponentB });
     }
 
     static IAllOfMatcher<TestEntity> allOfBA() {
-        return Matcher<TestEntity>.AllOf(new [] { CID.ComponentB, CID.ComponentA });
+        return Matcher<TestEntity>.CreateAllOf(new [] { CID.ComponentB, CID.ComponentA });
     }
 }

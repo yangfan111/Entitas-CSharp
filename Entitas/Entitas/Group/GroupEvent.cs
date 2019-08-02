@@ -1,6 +1,6 @@
 namespace Entitas {
 
-    public enum GroupEvent : byte {
+    public enum EGroupEvent : byte {
         Added,
         Removed,
         AddedOrRemoved

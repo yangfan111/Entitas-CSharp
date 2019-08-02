@@ -5,12 +5,12 @@ using Entitas;
 public class MultiTriggeredMultiReactiveSystemSpy : MultiReactiveSystem<IMyEntity, Contexts> {
 
     public int didExecute { get { return _didExecute; } }
-    public IEntity[] entities { get { return _entities; } }
+    public IEntityExt[] entities { get { return _entities; } }
 
     public Action<List<IMyEntity>> executeAction;
 
     protected int _didExecute;
-    protected IEntity[] _entities;
+    protected IEntityExt[] _entities;
 
     public MultiTriggeredMultiReactiveSystemSpy(Contexts contexts) : base(contexts) {
     }

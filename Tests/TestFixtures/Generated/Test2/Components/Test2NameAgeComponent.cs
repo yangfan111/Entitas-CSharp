@@ -57,7 +57,7 @@ public sealed partial class Test2Matcher {
     public static Entitas.IMatcher<Test2Entity> NameAge {
         get {
             if (_matcherNameAge == null) {
-                var matcher = (Entitas.Matcher<Test2Entity>)Entitas.Matcher<Test2Entity>.AllOf(Test2ComponentsLookup.NameAge);
+                var matcher = (Entitas.Matcher<Test2Entity>)Entitas.Matcher<Test2Entity>.CreateAllOf(Test2ComponentsLookup.NameAge);
                 matcher.componentNames = Test2ComponentsLookup.componentNames;
                 _matcherNameAge = matcher;
             }

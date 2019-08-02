@@ -3,7 +3,7 @@ using NSpec;
 
 class describe_ReactiveSystem : nspec {
 
-    readonly IMatcher<TestEntity> _matcherAB = Matcher<TestEntity>.AllOf(CID.ComponentA, CID.ComponentB);
+    readonly IMatcher<TestEntity> _matcherAB = Matcher<TestEntity>.CreateAllOf(CID.ComponentA, CID.ComponentB);
 
     static void assertEntities(IReactiveSystemSpy system, TestEntity entity, int didExecute = 1) {
         if (entity == null) {
@@ -215,13 +215,13 @@ class describe_ReactiveSystem : nspec {
                 context1 = new MyTestContext();
                 context2 = new MyTestContext();
 
-                var groupA = context1.GetGroup(Matcher<TestEntity>.AllOf(CID.ComponentA));
-                var groupB = context2.GetGroup(Matcher<TestEntity>.AllOf(CID.ComponentB));
+                var groupA = context1.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var groupB = context2.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
 
                 var groups = new [] { groupA, groupB };
                 var groupEvents = new [] {
-                    GroupEvent.Added,
-                    GroupEvent.Removed
+                    EGroupEvent.Added,
+                    EGroupEvent.Removed
                 };
                 var collector = new Collector<TestEntity>(groups, groupEvents);
 

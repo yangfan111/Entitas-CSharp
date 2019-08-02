@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
-namespace Entitas {
-
+namespace Entitas
+{
     /// Automatic Entity Reference Counting (AERC)
     /// is used internally to prevent pooling retained entities.
     /// If you use retain manually you also have to
@@ -9,29 +9,42 @@ namespace Entitas {
     /// SafeAERC checks if the entity has already been
     /// retained or released. It's slower, but you keep the information
     /// about the owners.
-    public sealed class SafeAERC : IAERC {
-
-        public int retainCount { get { return _owners.Count; } }
-
-        public HashSet<object> owners { get { return _owners; } }
-
-        readonly IEntity _entity;
+    public sealed class SafeAERC : IAERC
+    {
+        readonly EntityExt _entity;
         readonly HashSet<object> _owners = new HashSet<object>();
 
-        public SafeAERC(IEntity entity) {
+        public SafeAERC(EntityExt entity)
+        {
             _entity = entity;
         }
 
-        public void Retain(object owner) {
-            if (!owners.Add(owner)) {
+        public HashSet<object> owners
+        {
+            get { return _owners; }
+        }
+
+        public int retainCount
+        {
+            get { return _owners.Count; }
+        }
+
+        public void Retain(object owner, bool throwIfRepeated=true)
+        {
+            if (!owners.Add(owner) && throwIfRepeated)
+            {
                 throw new EntityIsAlreadyRetainedByOwnerException(_entity, owner);
             }
         }
 
-        public void Release(object owner) {
-            if (!owners.Remove(owner)) {
+        public void Release(object owner, bool throwIfNotExisted=true)
+        {
+            if (!owners.Remove(owner) && throwIfNotExisted)
+            {
                 throw new EntityIsNotRetainedByOwnerException(_entity, owner);
             }
         }
+
+      
     }
 }

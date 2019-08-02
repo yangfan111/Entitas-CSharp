@@ -4,41 +4,29 @@ namespace Entitas {
 
     public delegate void GroupChanged<TEntity>(
         IGroup<TEntity> group, TEntity entity, int index, IComponent component
-    ) where TEntity : class, IEntity;
+    ) where TEntity : class, IEntityExt;
 
     public delegate void GroupUpdated<TEntity>(
         IGroup<TEntity> group, TEntity entity, int index,
         IComponent previousComponent, IComponent newComponent
-    ) where TEntity : class, IEntity;
+    ) where TEntity : class, IEntityExt;
 
-    public interface IGroup {
 
-        int count { get; }
 
-        void RemoveAllEventHandlers();
-    }
-
-    public interface IGroup<TEntity> : IGroup where TEntity : class, IEntity {
-
-        event GroupChanged<TEntity> OnEntityAdded;
-        event GroupChanged<TEntity> OnEntityRemoved;
-        event GroupUpdated<TEntity> OnEntityUpdated;
-
-        IMatcher<TEntity> matcher { get; }
-
-        void HandleEntitySilently(TEntity entity);
-        void HandleEntity(TEntity entity, int index, IComponent component);
-        GroupChanged<TEntity> HandleEntity(TEntity entity);
-
-        void UpdateEntity(TEntity entity, int index, IComponent previousComponent, IComponent newComponent);
-
-        bool ContainsEntity(TEntity entity);
+    public interface IGroup<TEntity> :IGroup where TEntity : class, IEntityExt{
+        
 
         TEntity[] GetEntities();
-        List<TEntity> GetEntities(List<TEntity> buffer);
-        TEntity GetSingleEntity();
+        GroupChanged<TEntity> HandleEntityNotifyOutside(TEntity entity);
 
-        IEnumerable<TEntity> AsEnumerable();
-        HashSet<TEntity>.Enumerator GetEnumerator();
+        void BroadcastGroupEventsIfHoldEntity(TEntity entity, int index, IComponent previousComponent,
+                                              IComponent newComponent);
+    }
+
+    public interface IGroup
+    {
+        int Count { get; }
+
+        void RemoveAllEvents();
     }
 }

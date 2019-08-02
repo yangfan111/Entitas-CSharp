@@ -9,18 +9,18 @@
 public sealed partial class InputMatcher {
 
     public static Entitas.IAllOfMatcher<InputEntity> AllOf(params int[] indices) {
-        return Entitas.Matcher<InputEntity>.AllOf(indices);
+        return Entitas.Matcher<InputEntity>.CreateAllOf(indices);
     }
 
     public static Entitas.IAllOfMatcher<InputEntity> AllOf(params Entitas.IMatcher<InputEntity>[] matchers) {
-          return Entitas.Matcher<InputEntity>.AllOf(matchers);
+          return Entitas.Matcher<InputEntity>.CreateAllOf(matchers);
     }
 
     public static Entitas.IAnyOfMatcher<InputEntity> AnyOf(params int[] indices) {
-          return Entitas.Matcher<InputEntity>.AnyOf(indices);
+          return Entitas.Matcher<InputEntity>.CreateAnyOf(indices);
     }
 
     public static Entitas.IAnyOfMatcher<InputEntity> AnyOf(params Entitas.IMatcher<InputEntity>[] matchers) {
-          return Entitas.Matcher<InputEntity>.AnyOf(matchers);
+          return Entitas.Matcher<InputEntity>.CreateAnyOf(matchers);
     }
 }

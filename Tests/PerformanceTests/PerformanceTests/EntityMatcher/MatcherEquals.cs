@@ -7,12 +7,12 @@ public class MatcherEquals : IPerformanceTest {
     IMatcher<Entity> _m2;
 
     public void Before() {
-        _m1 = Matcher<Entity>.AllOf(new [] {
+        _m1 = Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentB,
             CP.ComponentC
         });
-        _m2 = Matcher<Entity>.AllOf(new [] {
+        _m2 = Matcher<Entity>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentB,
             CP.ComponentC

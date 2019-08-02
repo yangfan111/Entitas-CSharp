@@ -34,7 +34,7 @@ namespace Entitas.Blueprints {
             }
         }
 
-        public IComponent CreateComponent(IEntity entity) {
+        public IComponent CreateComponent(IEntityExt entity) {
             if (_type == null) {
                 _type = fullTypeName.ToType();
 

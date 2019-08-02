@@ -55,7 +55,7 @@ namespace Entitas.VisualDebugging.Unity.Editor {
             _componentDrawers = AppDomain.CurrentDomain.GetInstancesOf<IComponentDrawer>();
         }
 
-        static bool[] getUnfoldedComponents(IEntity entity) {
+        static bool[] getUnfoldedComponents(IEntityExt entity) {
             bool[] unfoldedComponents;
             if (!contextToUnfoldedComponents.TryGetValue(entity.contextInfo.name, out unfoldedComponents)) {
                 unfoldedComponents = new bool[entity.totalComponents];
@@ -68,7 +68,7 @@ namespace Entitas.VisualDebugging.Unity.Editor {
             return unfoldedComponents;
         }
 
-        static string[] getComponentMemberSearch(IEntity entity) {
+        static string[] getComponentMemberSearch(IEntityExt entity) {
             string[] componentMemberSearch;
             if (!contextToComponentMemberSearch.TryGetValue(entity.contextInfo.name, out componentMemberSearch)) {
                 componentMemberSearch = new string[entity.totalComponents];
@@ -81,7 +81,7 @@ namespace Entitas.VisualDebugging.Unity.Editor {
             return componentMemberSearch;
         }
 
-        static ComponentInfo[] getComponentInfos(IEntity entity) {
+        static ComponentInfo[] getComponentInfos(IEntityExt entity) {
             ComponentInfo[] infos;
             if (!contextToComponentInfos.TryGetValue(entity.contextInfo.name, out infos)) {
                 var contextInfo = entity.contextInfo;
@@ -100,7 +100,7 @@ namespace Entitas.VisualDebugging.Unity.Editor {
             return infos;
         }
 
-        static GUIStyle getColoredBoxStyle(IEntity entity, int index) {
+        static GUIStyle getColoredBoxStyle(IEntityExt entity, int index) {
             GUIStyle[] styles;
             if (!contextToColoredBoxStyles.TryGetValue(entity.contextInfo.name, out styles)) {
                 styles = new GUIStyle[entity.totalComponents];

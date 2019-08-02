@@ -45,7 +45,7 @@ public sealed partial class GameMatcher {
     public static Entitas.IMatcher<GameEntity> CleanupDestroy {
         get {
             if (_matcherCleanupDestroy == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.CleanupDestroy);
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.CreateAllOf(GameComponentsLookup.CleanupDestroy);
                 matcher.componentNames = GameComponentsLookup.componentNames;
                 _matcherCleanupDestroy = matcher;
             }

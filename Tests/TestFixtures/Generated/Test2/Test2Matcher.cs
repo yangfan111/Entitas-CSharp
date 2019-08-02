@@ -9,18 +9,18 @@
 public sealed partial class Test2Matcher {
 
     public static Entitas.IAllOfMatcher<Test2Entity> AllOf(params int[] indices) {
-        return Entitas.Matcher<Test2Entity>.AllOf(indices);
+        return Entitas.Matcher<Test2Entity>.CreateAllOf(indices);
     }
 
     public static Entitas.IAllOfMatcher<Test2Entity> AllOf(params Entitas.IMatcher<Test2Entity>[] matchers) {
-          return Entitas.Matcher<Test2Entity>.AllOf(matchers);
+          return Entitas.Matcher<Test2Entity>.CreateAllOf(matchers);
     }
 
     public static Entitas.IAnyOfMatcher<Test2Entity> AnyOf(params int[] indices) {
-          return Entitas.Matcher<Test2Entity>.AnyOf(indices);
+          return Entitas.Matcher<Test2Entity>.CreateAnyOf(indices);
     }
 
     public static Entitas.IAnyOfMatcher<Test2Entity> AnyOf(params Entitas.IMatcher<Test2Entity>[] matchers) {
-          return Entitas.Matcher<Test2Entity>.AnyOf(matchers);
+          return Entitas.Matcher<Test2Entity>.CreateAnyOf(matchers);
     }
 }

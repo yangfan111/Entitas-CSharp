@@ -45,7 +45,7 @@ public sealed partial class GameMatcher {
     public static Entitas.IMatcher<GameEntity> GeneratedContext {
         get {
             if (_matcherGeneratedContext == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.GeneratedContext);
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.CreateAllOf(GameComponentsLookup.GeneratedContext);
                 matcher.componentNames = GameComponentsLookup.componentNames;
                 _matcherGeneratedContext = matcher;
             }

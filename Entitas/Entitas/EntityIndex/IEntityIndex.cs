@@ -1,8 +1,8 @@
 ﻿namespace Entitas {
 
-    public interface IEntityIndex {
+    public interface IEntityExtIndex {
 
-        string name { get; }
+        string Name { get; }
 
         void Activate();
         void Deactivate();

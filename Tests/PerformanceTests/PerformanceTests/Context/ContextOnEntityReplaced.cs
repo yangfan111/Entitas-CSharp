@@ -4,11 +4,11 @@ public class ContextOnEntityReplaced : IPerformanceTest {
 
     const int n = 100000;
     IContext<Entity> _context;
-    IEntity _e;
+    IEntityExt _e;
 
     public void Before() {
         _context = Helper.CreateContext();
-        _context.GetGroup(Matcher<Entity>.AllOf(new [] { CP.ComponentA }));
+        _context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentA }));
         _e = _context.CreateEntity();
         _e.AddComponent(CP.ComponentA, new ComponentA());
     }

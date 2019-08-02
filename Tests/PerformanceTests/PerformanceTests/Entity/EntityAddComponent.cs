@@ -4,7 +4,7 @@ using Entitas;
 public class EntityAddComponent : IPerformanceTest {
 
     const int n = 10000000;
-    IEntity _e;
+    IEntityExt _e;
     ComponentA _componentA;
 
     public void Before() {
