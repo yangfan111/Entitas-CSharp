@@ -15,7 +15,7 @@ public sealed class StandardEntityEventRemovedEventSystem : Entitas.ReactiveSyst
     }
 
     protected override Entitas.ICollector<TestEntity> GetTrigger(Entitas.IContext<TestEntity> context) {
-        return Entitas.CollectorContextExtension.CreateCollector(
+        return Entitas.CollectorUtil.CreateCollector(
             context, Entitas.TriggerOnEventMatcherExtension.Removed(TestMatcher.StandardEntityEvent)
         );
     }

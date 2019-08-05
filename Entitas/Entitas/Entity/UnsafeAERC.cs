@@ -11,7 +11,7 @@
     {
         int _retainCount;
 
-        public int retainCount
+        public int RetainCount
         {
             get { return _retainCount; }
         }

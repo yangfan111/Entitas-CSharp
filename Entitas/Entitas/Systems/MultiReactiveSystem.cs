@@ -10,24 +10,24 @@ namespace Entitas
     public abstract class MultiReactiveSystem<TEntity, TContexts> : IReactiveSystem where TEntity : class, IEntityExt
     where TContexts : class, IContexts
     {
-        readonly List<TEntity> _buffer;
-        readonly HashSet<TEntity> _collectedEntities;
+        readonly List<TEntity> buffer;
+        readonly HashSet<TEntity> collectedEntities;
 
-        readonly ICollector[] _collectors;
+        readonly ICollector<TEntity>[] collectors;
         string _toStringCache;
 
         protected MultiReactiveSystem(TContexts contexts)
         {
-            _collectors        = GetTrigger(contexts);
-            _collectedEntities = new HashSet<TEntity>();
-            _buffer            = new List<TEntity>();
+            collectors        = GetTrigger(contexts);
+            collectedEntities = new HashSet<TEntity>();
+            buffer            = new List<TEntity>();
         }
 
-        protected MultiReactiveSystem(ICollector[] collectors)
+        protected MultiReactiveSystem(ICollector<TEntity>[] collectors)
         {
-            _collectors        = collectors;
-            _collectedEntities = new HashSet<TEntity>();
-            _buffer            = new List<TEntity>();
+            this.collectors   = collectors;
+            collectedEntities = new HashSet<TEntity>();
+            buffer            = new List<TEntity>();
         }
 
         /// Activates the ReactiveSystem and starts observing changes
@@ -35,9 +35,9 @@ namespace Entitas
         /// ReactiveSystem are activated by default.
         public void Activate()
         {
-            for (int i = 0; i < _collectors.Length; i++)
+            for (int i = 0; i < collectors.Length; i++)
             {
-                _collectors[i].Activate();
+                collectors[i].Activate();
             }
         }
 
@@ -47,18 +47,18 @@ namespace Entitas
         /// ReactiveSystem are activated by default.
         public void Deactivate()
         {
-            for (int i = 0; i < _collectors.Length; i++)
+            for (int i = 0; i < collectors.Length; i++)
             {
-                _collectors[i].Deactivate();
+                collectors[i].Deactivate();
             }
         }
 
         /// Clears all accumulated changes.
         public void Clear()
         {
-            for (int i = 0; i < _collectors.Length; i++)
+            for (int i = 0; i < collectors.Length; i++)
             {
-                _collectors[i].ClearCollectedEntities();
+                collectors[i].ClearCollectedEntities();
             }
         }
 
@@ -66,46 +66,46 @@ namespace Entitas
         /// if there are any. Otherwise it will not call Execute(entities).
         public void Execute()
         {
-            for (int i = 0; i < _collectors.Length; i++)
+            for (int i = 0; i < collectors.Length; i++)
             {
-                var collector = _collectors[i];
-                if (collector.count != 0)
+                var collector = collectors[i];
+                if (collector.CollectedEntities.Count != 0)
                 {
-                    _collectedEntities.UnionWith(collector.GetCollectedEntities<TEntity>());
+                    collectedEntities.UnionWith(collector.CollectedEntities);
                     collector.ClearCollectedEntities();
                 }
             }
 
-            foreach (var e in _collectedEntities)
+            foreach (var e in collectedEntities)
             {
                 if (Filter(e))
                 {
                     e.Retain(this);
-                    _buffer.Add(e);
+                    buffer.Add(e);
                 }
             }
 
-            if (_buffer.Count != 0)
+            if (buffer.Count != 0)
             {
                 try
                 {
-                    Execute(_buffer);
+                    Execute(buffer);
                 }
                 finally
                 {
-                    for (int i = 0; i < _buffer.Count; i++)
+                    for (int i = 0; i < buffer.Count; i++)
                     {
-                        _buffer[i].Release(this);
+                        buffer[i].Release(this);
                     }
 
-                    _collectedEntities.Clear();
-                    _buffer.Clear();
+                    collectedEntities.Clear();
+                    buffer.Clear();
                 }
             }
         }
 
         /// Specify the collector that will trigger the ReactiveSystem.
-        protected abstract ICollector[] GetTrigger(TContexts contexts);
+        protected abstract ICollector<TEntity>[] GetTrigger(TContexts contexts);
 
         /// This will exclude all entities which don't pass the filter.
         protected abstract bool Filter(TEntity entity);

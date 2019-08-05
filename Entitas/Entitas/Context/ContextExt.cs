@@ -8,7 +8,7 @@ namespace Entitas
 
     {
         //entitas的回收池
-        private readonly Stack<T> EntitiesRecyclePool = new Stack<T>();
+        private readonly Stack<T> recycleentitiesPool = new Stack<T>();
 
         //entitas其他持有项
         readonly HashSet<T> retainedEntities = new HashSet<T>(EntityEqualityComparer<T>.Comparer);
@@ -187,9 +187,9 @@ namespace Entitas
         public T CreateEntity()
         {
             T entity;
-            if (EntitiesRecyclePool.Count > 0)
+            if (recycleentitiesPool.Count > 0)
             {
-                entity = EntitiesRecyclePool.Pop();
+                entity = recycleentitiesPool.Pop();
                 //-使用_creationIndex做标记索引
                 entity.Relive(creationIndex++);
             }
@@ -300,7 +300,7 @@ namespace Entitas
             T tEntity = (T) entity;
             //selfEntities.Remove(tEntity);
             retainedEntities.Remove(tEntity);
-            EntitiesRecyclePool.Push(tEntity);
+            recycleentitiesPool.Push(tEntity);
             CleanCache();
         }
 
@@ -321,13 +321,13 @@ namespace Entitas
         void OnAfterEntityDestroyed(IEntityExt entityExt)
         {
             var tEntity = (T) entityExt;
-            if (tEntity.retainCount > 1)
+            if (tEntity.RetainCount > 1)
             {
                 retainedEntities.Add(tEntity);
             }
             else
             {
-                EntitiesRecyclePool.Push(tEntity);
+                recycleentitiesPool.Push(tEntity);
             }
 
             tEntity.Release(this);

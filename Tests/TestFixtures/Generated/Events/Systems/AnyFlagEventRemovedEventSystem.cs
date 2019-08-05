@@ -19,7 +19,7 @@ public sealed class AnyFlagEventRemovedEventSystem : Entitas.ReactiveSystem<Test
     }
 
     protected override Entitas.ICollector<TestEntity> GetTrigger(Entitas.IContext<TestEntity> context) {
-        return Entitas.CollectorContextExtension.CreateCollector(
+        return Entitas.CollectorUtil.CreateCollector(
             context, Entitas.TriggerOnEventMatcherExtension.Removed(TestMatcher.FlagEvent)
         );
     }

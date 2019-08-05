@@ -36,15 +36,17 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entitas\Collector\CollectorExt.cs" />
     <Compile Include="Entitas\Context\ContextExt.cs" />
     <Compile Include="Entitas\Context\ContextUtil.cs" />
     <Compile Include="Entitas\EntityIndex\AbstractEntityIndexer.cs" />
     <Compile Include="Entitas\EntityIndex\IEntityIndex.cs" />
     <Compile Include="Entitas\Entity\EntityExt.cs" />
-    <Compile Include="Entitas\Entity\EntityExtUtil.cs" />
+    <Compile Include="Entitas\Entity\EntityUtil.cs" />
     <Compile Include="Entitas\FrameworkUtil.cs" />
     <Compile Include="Entitas\Group\GroupExt.cs" />
     <Compile Include="Entitas\Legacy\legacyAbstractEntityIndex.cs" />
+    <Compile Include="Entitas\Legacy\legacyCollector.cs" />
     <Compile Include="Entitas\Legacy\legacyContext.cs" />
     <Compile Include="Entitas\Legacy\legacyGroup.cs" />
     <Compile Include="Entitas\Matcher\Interfaces\IAllOfMatcher.cs" />
@@ -58,7 +60,6 @@
     <Compile Include="Entitas\Systems\Systems.cs" />
     <Compile Include="Entitas\Systems\ReactiveSystem.cs" />
     <Compile Include="Entitas\Group\GroupEvent.cs" />
-    <Compile Include="Entitas\Context\ContextExtension.cs" />
     <Compile Include="Entitas\Group\GroupExtension.cs" />
     <Compile Include="Entitas\Context\Exceptions\ContextDoesNotContainEntityException.cs" />
     <Compile Include="Entitas\Context\Exceptions\ContextEntityIndexDoesAlreadyExistException.cs" />
@@ -75,7 +76,6 @@
     <Compile Include="Entitas\Group\GroupSingleEntityException.cs" />
     <Compile Include="Entitas\EntityIndex\EntityIndexException.cs" />
     <Compile Include="Entitas\Matcher\MatcherException.cs" />
-    <Compile Include="Entitas\Collector\Collector.cs" />
     <Compile Include="Entitas\Collector\CollectorException.cs" />
     <Compile Include="Entitas\EntitasResources.cs" />
     <Compile Include="Entitas\Extensions\CollectionExtension.cs" />
@@ -96,8 +96,8 @@
     <Compile Include="Entitas\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Entitas\Systems\Interfaces\ITearDownSystem.cs" />
     <Compile Include="Entitas\Matcher\Interfaces\IMatcher.cs" />
-    <Compile Include="Entitas\Collector\TriggerOnEvent.cs" />
-    <Compile Include="Entitas\Collector\CollectorContextExtension.cs" />
+    <Compile Include="Entitas\Collector\MatcherEvent.cs" />
+    <Compile Include="Entitas\Collector\CollectorUtil.cs" />
     <Compile Include="Entitas\Collector\TriggerOnEventMatcherExtension.cs" />
     <Compile Include="Entitas\Collector\ICollector.cs" />
     <Compile Include="Entitas\Systems\MultiReactiveSystem.cs" />

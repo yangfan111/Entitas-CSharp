@@ -9,21 +9,20 @@ namespace Entitas
     /// of the related gameObject.
     public abstract class ReactiveSystem<TEntity> : IReactiveSystem where TEntity : class, IEntityExt
     {
-        readonly List<TEntity> _buffer;
-
-        readonly ICollector<TEntity> _collector;
+        readonly ICollector<TEntity> collector;
+        readonly List<TEntity> entityBuffer;
         string _toStringCache;
 
         protected ReactiveSystem(IContextExt<TEntity> context)
         {
-            _collector = GetTrigger(context);
-            _buffer    = new List<TEntity>();
+            collector    = GetTrigger(context);
+            entityBuffer = new List<TEntity>();
         }
 
         protected ReactiveSystem(ICollector<TEntity> collector)
         {
-            _collector = collector;
-            _buffer    = new List<TEntity>();
+            this.collector = collector;
+            entityBuffer   = new List<TEntity>();
         }
 
         /// Activates the ReactiveSystem and starts observing changes
@@ -31,7 +30,7 @@ namespace Entitas
         /// ReactiveSystem are activated by default.
         public void Activate()
         {
-            _collector.Activate();
+            collector.Activate();
         }
 
         /// Deactivates the ReactiveSystem.
@@ -40,47 +39,47 @@ namespace Entitas
         /// ReactiveSystem are activated by default.
         public void Deactivate()
         {
-            _collector.Deactivate();
+            collector.Deactivate();
         }
 
         /// Clears all accumulated changes.
         public void Clear()
         {
-            _collector.ClearCollectedEntities();
+            collector.ClearCollectedEntities();
         }
 
         /// Will call Execute(entities) with changed entities
         /// if there are any. Otherwise it will not call Execute(entities).
         public void Execute()
         {
-            if (_collector.count == 0)
+            if (collector.CollectedEntities.Count == 0)
                 return;
             {
-                foreach (var e in _collector.collectedEntities)
+                foreach (var e in collector.CollectedEntities)
                 {
                     if (Filter(e))
                     {
                         e.Retain(this);
-                        _buffer.Add(e);
+                        entityBuffer.Add(e);
                     }
                 }
 
-                _collector.ClearCollectedEntities();
+                collector.ClearCollectedEntities();
 
-                if (_buffer.Count != 0)
+                if (entityBuffer.Count != 0)
                 {
                     try
                     {
-                        Execute(_buffer);
+                        Execute(entityBuffer);
                     }
                     finally
                     {
-                        for (int i = 0; i < _buffer.Count; i++)
+                        for (int i = 0; i < entityBuffer.Count; i++)
                         {
-                            _buffer[i].Release(this);
+                            entityBuffer[i].Release(this);
                         }
 
-                        _buffer.Clear();
+                        entityBuffer.Clear();
                     }
                 }
             }

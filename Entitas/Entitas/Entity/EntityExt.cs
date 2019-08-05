@@ -1,20 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Entitas
 {
-   
     public class EntityExt : IEntityExt
     {
         public int TotalComponentsCount { get; private set; }
 
-        //-被context管理,当前索引号
-        public int CreationIndex { get; private set; }
-
-        public bool IsEnabled { get; private set; }
-
-        public LoggerLevel LoggerLevel { get; set; }
 
         public Stack<IComponent>[] ComponentsRecirclePool { get; private set; }
 
@@ -22,34 +14,38 @@ namespace Entitas
 
         public IAERC Aerc { get; private set; }
 
-        public int retainCount
+        //-被context管理,当前索引号
+        public int CreationIndex { get; private set; }
+
+        public bool IsEnabled { get; private set; }
+
+        public int RetainCount
         {
-            get { return Aerc.retainCount; }
+            get { return Aerc.RetainCount; }
         }
 
-        public void Retain(object owner,bool throwIfRepeated=true)
+        public void Retain(object owner, bool throwIfRepeated = true)
         {
-            Aerc.Retain(this,throwIfRepeated);
+            Aerc.Retain(this, throwIfRepeated);
         }
 
-        public void Release(object owner,bool throwIfRepeated=true)
+        public void Release(object owner, bool throwIfRepeated = true)
         {
-            Aerc.Release(owner,throwIfRepeated);
+            Aerc.Release(owner, throwIfRepeated);
             // TODO VD PERFORMANCE
             // _toStringCache = null;
-            if (Aerc.retainCount == 0)
+            if (Aerc.RetainCount == 0)
             {
                 if (OnEntityReleased != null)
                 {
                     OnEntityReleased(this);
                     OnEntityReleased = null;
-
                 }
             }
         }
 
         //为Entity添加component后回调
-        public event EntityExtComponentChanged OnComponentAdded;
+        public event EntityExtComponentChanged  OnComponentAdded;
         public event EntityExtComponentChanged  OnComponentRemoved;
         public event EntityExtComponentReplaced OnComponentReplaced;
 
@@ -85,6 +81,11 @@ namespace Entitas
             }
 
             return new ContextInfo("No Context", componentNames, null);
+        }
+
+        public override string ToString()
+        {
+            return FrameworkUtil.ToString(this);
         }
 
         #region //local var
@@ -251,7 +252,7 @@ namespace Entitas
         {
             if (!IsEnabled)
             {
-                FrameworkUtil.ThrowException( "Cannot add component", "entity is not enabled");
+                FrameworkUtil.ThrowException("Cannot add component", "entity is not enabled");
                 return;
             }
 
@@ -353,10 +354,5 @@ namespace Entitas
         }
 
         #endregion
-
-        public override string ToString()
-        {
-            return FrameworkUtil.ToString(this);
-        }
     }
 }

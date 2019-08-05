@@ -2,16 +2,16 @@
 
     public static class TriggerOnEventMatcherExtension {
 
-        public static TriggerOnEvent<TEntity> Added<TEntity>(this IMatcher<TEntity> matcher) where TEntity : class, IEntityExt {
-            return new TriggerOnEvent<TEntity>(matcher, EGroupEvent.Added);
+        public static MatcherEvent<TEntity> Added<TEntity>(this IMatcher<TEntity> matcher) where TEntity : class, IEntityExt {
+            return new MatcherEvent<TEntity>(matcher, EGroupEvent.Added);
         }
 
-        public static TriggerOnEvent<TEntity> Removed<TEntity>(this IMatcher<TEntity> matcher) where TEntity : class, IEntityExt {
-            return new TriggerOnEvent<TEntity>(matcher, EGroupEvent.Removed);
+        public static MatcherEvent<TEntity> Removed<TEntity>(this IMatcher<TEntity> matcher) where TEntity : class, IEntityExt {
+            return new MatcherEvent<TEntity>(matcher, EGroupEvent.Removed);
         }
 
-        public static TriggerOnEvent<TEntity> AddedOrRemoved<TEntity>(this IMatcher<TEntity> matcher) where TEntity : class, IEntityExt {
-            return new TriggerOnEvent<TEntity>(matcher, EGroupEvent.AddedOrRemoved);
+        public static MatcherEvent<TEntity> AddedOrRemoved<TEntity>(this IMatcher<TEntity> matcher) where TEntity : class, IEntityExt {
+            return new MatcherEvent<TEntity>(matcher, EGroupEvent.AddedOrRemoved);
         }
     }
 }

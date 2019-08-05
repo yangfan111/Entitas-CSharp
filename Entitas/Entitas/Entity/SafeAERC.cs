@@ -24,7 +24,7 @@ namespace Entitas
             get { return _owners; }
         }
 
-        public int retainCount
+        public int RetainCount
         {
             get { return _owners.Count; }
         }

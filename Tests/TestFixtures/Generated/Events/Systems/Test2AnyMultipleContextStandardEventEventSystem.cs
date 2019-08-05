@@ -19,7 +19,7 @@ public sealed class Test2AnyMultipleContextStandardEventEventSystem : Entitas.Re
     }
 
     protected override Entitas.ICollector<Test2Entity> GetTrigger(Entitas.IContext<Test2Entity> context) {
-        return Entitas.CollectorContextExtension.CreateCollector(
+        return Entitas.CollectorUtil.CreateCollector(
             context, Entitas.TriggerOnEventMatcherExtension.Added(Test2Matcher.MultipleContextStandardEvent)
         );
     }

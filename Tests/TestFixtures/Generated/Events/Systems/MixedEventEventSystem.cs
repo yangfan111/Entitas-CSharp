@@ -15,7 +15,7 @@ public sealed class MixedEventEventSystem : Entitas.ReactiveSystem<TestEntity> {
     }
 
     protected override Entitas.ICollector<TestEntity> GetTrigger(Entitas.IContext<TestEntity> context) {
-        return Entitas.CollectorContextExtension.CreateCollector(
+        return Entitas.CollectorUtil.CreateCollector(
             context, Entitas.TriggerOnEventMatcherExtension.Added(TestMatcher.MixedEvent)
         );
     }
