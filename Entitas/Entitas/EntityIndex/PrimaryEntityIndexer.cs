@@ -62,7 +62,7 @@ namespace Entitas
         {
             if (indexs.ContainsKey(key))
             {
-                FrameworkUtil.ThrowException("Entity for key '" + key + "' already exists");
+                FrameworkUtil.ThrowException("EntityExt for key '" + key + "' already exists");
                 return;
             }
 

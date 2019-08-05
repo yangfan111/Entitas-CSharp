@@ -13,7 +13,7 @@ public sealed class AnyFlagEventRemovedEventSystem : Entitas.ReactiveSystem<Test
     readonly System.Collections.Generic.List<IAnyFlagEventRemovedListener> _listenerBuffer;
 
     public AnyFlagEventRemovedEventSystem(Contexts contexts) : base(contexts.test) {
-        _listeners = contexts.test.GetGroup(TestMatcher.AnyFlagEventRemovedListener);
+        _listeners = contexts.test.AddGetGroup(TestMatcher.AnyFlagEventRemovedListener);
         _entityBuffer = new System.Collections.Generic.List<TestEntity>();
         _listenerBuffer = new System.Collections.Generic.List<IAnyFlagEventRemovedListener>();
     }

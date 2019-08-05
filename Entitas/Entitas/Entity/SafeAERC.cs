@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Entitas
 {
-    /// Automatic Entity Reference Counting (AERC)
+    /// Automatic EntityExt Reference Counting (AERC)
     /// is used internally to prevent pooling retained entities.
     /// If you use retain manually you also have to
     /// release it manually at some point.

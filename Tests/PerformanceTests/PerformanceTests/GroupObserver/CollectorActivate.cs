@@ -3,11 +3,11 @@
 public class CollectorActivate : IPerformanceTest {
 
     const int n = 10000;
-    ICollector<Entity> _collector;
+    ICollector<EntityExt> _collector;
 
     public void Before() {
         var context = Helper.CreateContext();
-        var group = context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentA }));
+        var group = context.AddGetGroup(Matcher<EntityExt>.CreateAllOf(new [] { CP.ComponentA }));
         _collector = group.CreateCollector();
     }
 

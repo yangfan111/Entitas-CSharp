@@ -3,10 +3,10 @@ using Entitas;
 public class MatcherGetHashCode : IPerformanceTest {
 
     const int n = 10000000;
-    IMatcher<Entity> _m;
+    IMatcher<EntityExt> _m;
 
     public void Before() {
-        _m = Matcher<Entity>.CreateAllOf(new [] {
+        _m = Matcher<EntityExt>.CreateAllOf(new [] {
             CP.ComponentA,
             CP.ComponentB,
             CP.ComponentC

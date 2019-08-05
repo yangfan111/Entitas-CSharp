@@ -13,7 +13,7 @@ public sealed class AnyMixedEventEventSystem : Entitas.ReactiveSystem<TestEntity
     readonly System.Collections.Generic.List<IAnyMixedEventListener> _listenerBuffer;
 
     public AnyMixedEventEventSystem(Contexts contexts) : base(contexts.test) {
-        _listeners = contexts.test.GetGroup(TestMatcher.AnyMixedEventListener);
+        _listeners = contexts.test.AddGetGroup(TestMatcher.AnyMixedEventListener);
         _entityBuffer = new System.Collections.Generic.List<TestEntity>();
         _listenerBuffer = new System.Collections.Generic.List<IAnyMixedEventListener>();
     }

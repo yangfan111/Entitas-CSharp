@@ -15,7 +15,7 @@ class describe_EntityIndex : nspec {
 
             before = () => {
                 ctx = new MyTestContext();
-                group = ctx.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                group = ctx.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 indexer = new PrimaryEntityIndexer<TestEntity, string>("TestIndex", group, (e, c) => {
                     var nameAge = c as NameAgeComponent;
                     return nameAge != null
@@ -127,7 +127,7 @@ class describe_EntityIndex : nspec {
 
             before = () => {
                 ctx = new MyTestContext();
-                group = ctx.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                group = ctx.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 indexer = new PrimaryEntityIndexer<TestEntity, string>("TestIndex", group, (e, c) => {
                     var nameAge = c as NameAgeComponent;
                     return nameAge != null
@@ -194,7 +194,7 @@ class describe_EntityIndex : nspec {
 
             before = () => {
                 ctx = new MyTestContext();
-                group = ctx.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                group = ctx.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 indexer = new MutiEntityIndexer<TestEntity, string>("TestIndex", group, (e, c) => {
                     var nameAge = c as NameAgeComponent;
                     return nameAge != null
@@ -313,7 +313,7 @@ class describe_EntityIndex : nspec {
 
             before = () => {
                 ctx = new MyTestContext();
-                group = ctx.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                group = ctx.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 indexer = new MutiEntityIndexer<TestEntity, string>("TestIndex", group, (e, c) => {
                     return e == entity1
                         ? new [] { "1", "2" }
@@ -405,7 +405,7 @@ class describe_EntityIndex : nspec {
 
             IComponent receivedComponent = null;
 
-            group = ctx.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA, CID.ComponentB));
+            group = ctx.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA, CID.ComponentB));
             indexer = new MutiEntityIndexer<TestEntity, string>("TestIndex", group, (e, c) => {
                 receivedComponent = c;
                 return ((NameAgeComponent)c).name;
@@ -434,7 +434,7 @@ class describe_EntityIndex : nspec {
             var nameAgeComponent2 = new NameAgeComponent();
             nameAgeComponent2.name = "Jack";
 
-            group = ctx.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA).NoneOf(CID.ComponentB));
+            group = ctx.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA).NoneOf(CID.ComponentB));
             indexer = new MutiEntityIndexer<TestEntity, string>("TestIndex", group, (e, c) => {
                 receivedComponents.Add(c);
 

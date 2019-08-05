@@ -3,7 +3,7 @@
     public static class EntitasStringExtension {
 
         public const string CONTEXT_SUFFIX = "Context";
-        public const string ENTITY_SUFFIX = "Entity";
+        public const string ENTITY_SUFFIX = "EntityExt";
         public const string COMPONENT_SUFFIX = "Component";
         public const string SYSTEM_SUFFIX = "System";
         public const string MATCHER_SUFFIX = "Matcher";

@@ -37,7 +37,7 @@ public class RenderRotationSystem : IReactiveSystem
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded;
     } }
 
-    public void Execute(Entity[] entities) {
+    public void Execute(EntityExt[] entities) {
         // Do sth
     }
 }

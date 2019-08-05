@@ -46,7 +46,7 @@ public sealed class AddViewFromObjectPoolSystem : IInitializeSystem, ReactiveSys
 
 
 
-    protected override bool Filter(Entity entity) {
+    protected override bool Filter(EntityExt entity) {
 
         // TODO Entitas 0.36.0 Migration
 
@@ -72,7 +72,7 @@ public sealed class AddViewFromObjectPoolSystem : IInitializeSystem, ReactiveSys
     public void Initialize() {
     }
 
-    public void Execute(List<Entity> entities) {
+    public void Execute(List<EntityExt> entities) {
     }
 }
 ";

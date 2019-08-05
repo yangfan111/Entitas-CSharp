@@ -3,11 +3,11 @@
 public class CollectorIterateCollectedEntities : IPerformanceTest {
 
     const int n = 100000;
-    ICollector<Entity> _collector;
+    ICollector<EntityExt> _collector;
 
     public void Before() {
         var context = Helper.CreateContext();
-        var group = context.GetGroup(Matcher<Entity>.CreateAllOf(new [] { CP.ComponentA }));
+        var group = context.AddGetGroup(Matcher<EntityExt>.CreateAllOf(new [] { CP.ComponentA }));
         _collector = group.CreateCollector();
 
         for (int i = 0; i < 1000; i++) {
@@ -17,7 +17,7 @@ public class CollectorIterateCollectedEntities : IPerformanceTest {
     }
 
     public void Run() {
-        var entities = _collector.collectedEntities;
+        var entities = _collector.CollectedEntities;
         for (int i = 0; i < n; i++) {
             for (var j = entities.GetEnumerator(); j.MoveNext();) {
                 var e2 = j.Current;

@@ -13,7 +13,7 @@ public sealed class TestAnyMultipleContextStandardEventEventSystem : Entitas.Rea
     readonly System.Collections.Generic.List<ITestAnyMultipleContextStandardEventListener> _listenerBuffer;
 
     public TestAnyMultipleContextStandardEventEventSystem(Contexts contexts) : base(contexts.test) {
-        _listeners = contexts.test.GetGroup(TestMatcher.TestAnyMultipleContextStandardEventListener);
+        _listeners = contexts.test.AddGetGroup(TestMatcher.TestAnyMultipleContextStandardEventListener);
         _entityBuffer = new System.Collections.Generic.List<TestEntity>();
         _listenerBuffer = new System.Collections.Generic.List<ITestAnyMultipleContextStandardEventListener>();
     }

@@ -31,7 +31,7 @@ public class RenderPositionSystem : IReactiveSystem {
     public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Position, Matcher.View).OnEntityAdded(); } }
 
 
-    public void Execute(List<Entity> entities) {
+    public void Execute(List<EntityExt> entities) {
     }
 }
 ");

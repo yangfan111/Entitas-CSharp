@@ -13,7 +13,7 @@ public sealed class AnyBaseEventSystem : Entitas.ReactiveSystem<TestEntity> {
     readonly System.Collections.Generic.List<IAnyBaseListener> _listenerBuffer;
 
     public AnyBaseEventSystem(Contexts contexts) : base(contexts.test) {
-        _listeners = contexts.test.GetGroup(TestMatcher.AnyBaseListener);
+        _listeners = contexts.test.AddGetGroup(TestMatcher.AnyBaseListener);
         _entityBuffer = new System.Collections.Generic.List<TestEntity>();
         _listenerBuffer = new System.Collections.Generic.List<IAnyBaseListener>();
     }

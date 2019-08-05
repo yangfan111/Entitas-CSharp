@@ -6,5 +6,5 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class Test2Entity : Entitas.Entity {
+public sealed partial class Test2Entity : Entitas.EntityExt {
 }

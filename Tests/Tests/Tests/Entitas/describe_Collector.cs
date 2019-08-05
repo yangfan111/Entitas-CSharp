@@ -13,7 +13,7 @@ class describe_Collector : nspec {
 
         before = () => {
             _context = new MyTestContext();
-            groupA = _context.GetGroup(matcherA);
+            groupA = _context.AddGetGroup(matcherA);
         };
 
         context["when observing with GroupEvent.Added"] = () => {
@@ -169,7 +169,7 @@ class describe_Collector : nspec {
             IGroup<TestEntity> groupB = null;
 
             before = () => {
-                groupB = _context.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
+                groupB = _context.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
             };
 
             it["throws when group count != groupEvent count"] = expect<CollectorException>(() => {

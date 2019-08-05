@@ -15,7 +15,7 @@ public class EntityGetComponents : IPerformanceTest {
 
     public void Run() {
         for (int i = 0; i < n; i++) {
-            _e.GetComponents();
+            _e.GetComponentIndices();
         }
     }
 }

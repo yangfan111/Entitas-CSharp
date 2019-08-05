@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class TestContext {
 
-    public TestEntity uniqueFlagEntity { get { return GetGroup(TestMatcher.UniqueFlag).GetSingleEntity(); } }
+    public TestEntity uniqueFlagEntity { get { return AddGetGroup(TestMatcher.UniqueFlag).GetSingleEntity(); } }
 
     public bool isUniqueFlag {
         get { return uniqueFlagEntity != null; }

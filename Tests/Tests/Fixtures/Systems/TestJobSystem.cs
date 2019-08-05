@@ -7,7 +7,7 @@ public sealed class TestJobSystem : JobSystem<TestEntity> {
     public Exception exception;
 
     public TestJobSystem(TestContext context, int threads) :
-        base(context.GetGroup(TestMatcher.NameAge), threads) {
+        base(context.AddGetGroup(TestMatcher.NameAge), threads) {
     }
 
     protected override void Execute(TestEntity entity) {

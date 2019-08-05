@@ -13,7 +13,7 @@ public sealed class AnyStandardEventEventSystem : Entitas.ReactiveSystem<TestEnt
     readonly System.Collections.Generic.List<IAnyStandardEventListener> _listenerBuffer;
 
     public AnyStandardEventEventSystem(Contexts contexts) : base(contexts.test) {
-        _listeners = contexts.test.GetGroup(TestMatcher.AnyStandardEventListener);
+        _listeners = contexts.test.AddGetGroup(TestMatcher.AnyStandardEventListener);
         _entityBuffer = new System.Collections.Generic.List<TestEntity>();
         _listenerBuffer = new System.Collections.Generic.List<IAnyStandardEventListener>();
     }

@@ -31,7 +31,7 @@ class describe_EntitasErrorMessages : nspec {
             entity = ctx.CreateEntity();
         };
 
-        context["Entity"] = () => {
+        context["EntityExt"] = () => {
 
             context["when not enabled"] = () => {
 
@@ -79,7 +79,7 @@ class describe_EntitasErrorMessages : nspec {
                 ctx.CreateEntity().AddComponentA();
                 var matcher = (Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA);
                 matcher.componentNames = ctx.contextInfo.componentNames;
-                var group = ctx.GetGroup(matcher);
+                var group = ctx.AddGetGroup(matcher);
                 group.GetSingleEntity();
             });
         };
@@ -124,7 +124,7 @@ class describe_EntitasErrorMessages : nspec {
             });
 
             it["duplicate entityIndex"] = () => printErrorMessage(() => {
-                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var groupA = ctx.AddGetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 var index = new PrimaryEntityIndexer<TestEntity, string>("TestIndex", groupA, (arg1, arg2) => string.Empty);
                 ctx.AddEntityIndex(index);
                 ctx.AddEntityIndex(index);
@@ -167,13 +167,13 @@ class describe_EntitasErrorMessages : nspec {
         context["EntityIndex"] = () => {
 
             it["no entity with key"] = () => printErrorMessage(() => {
-                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var groupA = ctx.AddGetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 var index = new PrimaryEntityIndexer<TestEntity, string>("TestIndex", groupA, (e, c) => ((NameAgeComponent)c).name);
                 index.GetEntity("unknownKey");
             });
 
             it["multiple entities for primary key"] = () => printErrorMessage(() => {
-                var groupA = ctx.GetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var groupA = ctx.AddGetGroup((Matcher<TestEntity>)Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
                 new PrimaryEntityIndexer<TestEntity, string>("TestIndex", groupA, (e, c) => ((NameAgeComponent)c).name);
 
                 var nameAge = new NameAgeComponent();

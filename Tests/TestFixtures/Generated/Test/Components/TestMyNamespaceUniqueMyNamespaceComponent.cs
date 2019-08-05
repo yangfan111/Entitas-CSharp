@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class TestContext {
 
-    public TestEntity myNamespaceUniqueMyNamespaceEntity { get { return GetGroup(TestMatcher.MyNamespaceUniqueMyNamespace).GetSingleEntity(); } }
+    public TestEntity myNamespaceUniqueMyNamespaceEntity { get { return AddGetGroup(TestMatcher.MyNamespaceUniqueMyNamespace).GetSingleEntity(); } }
     public My.Namespace.UniqueMyNamespaceComponent myNamespaceUniqueMyNamespace { get { return myNamespaceUniqueMyNamespaceEntity.myNamespaceUniqueMyNamespace; } }
     public bool hasMyNamespaceUniqueMyNamespace { get { return myNamespaceUniqueMyNamespaceEntity != null; } }
 

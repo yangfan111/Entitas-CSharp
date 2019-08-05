@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class TestContext {
 
-    public TestEntity uniqueEventEntity { get { return GetGroup(TestMatcher.UniqueEvent).GetSingleEntity(); } }
+    public TestEntity uniqueEventEntity { get { return AddGetGroup(TestMatcher.UniqueEvent).GetSingleEntity(); } }
     public UniqueEventComponent uniqueEvent { get { return uniqueEventEntity.uniqueEvent; } }
     public bool hasUniqueEvent { get { return uniqueEventEntity != null; } }
 

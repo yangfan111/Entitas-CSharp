@@ -215,8 +215,8 @@ class describe_ReactiveSystem : nspec {
                 context1 = new MyTestContext();
                 context2 = new MyTestContext();
 
-                var groupA = context1.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
-                var groupB = context2.GetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
+                var groupA = context1.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentA));
+                var groupB = context2.AddGetGroup(Matcher<TestEntity>.CreateAllOf(CID.ComponentB));
 
                 var groups = new [] { groupA, groupB };
                 var groupEvents = new [] {

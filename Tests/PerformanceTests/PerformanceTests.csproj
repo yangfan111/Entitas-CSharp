@@ -36,19 +36,12 @@
     <Compile Include="PerformanceTests\IPerformanceTest.cs" />
     <Compile Include="PerformanceTestRunner.cs" />
     <Compile Include="PerformanceTests\EmptyTest.cs" />
-    <Compile Include="PerformanceTests\Entity\EntityGetComponents.cs" />
-    <Compile Include="PerformanceTests\Entity\EntityHasComponent.cs" />
     <Compile Include="PerformanceTests\Fixtures\ComponentA.cs" />
     <Compile Include="PerformanceTests\Fixtures\ComponentB.cs" />
     <Compile Include="PerformanceTests\Fixtures\ComponentC.cs" />
-    <Compile Include="PerformanceTests\Entity\EntityRemoveAddComponent.cs" />
-    <Compile Include="PerformanceTests\Entity\EntityGetComponent.cs" />
-    <Compile Include="PerformanceTests\Entity\EntityReplaceComponent.cs" />
     <Compile Include="PerformanceTests\Fixtures\CP.cs" />
     <Compile Include="PerformanceTests\EntityMatcher\MatcherGetHashCode.cs" />
     <Compile Include="PerformanceTests\EntityMatcher\MatcherEquals.cs" />
-    <Compile Include="PerformanceTests\Entity\EntityAddComponent.cs" />
-    <Compile Include="PerformanceTests\Entity\ObjectGetProperty.cs" />
     <Compile Include="PerformanceTests\GroupObserver\CollectorIterateCollectedEntities.cs" />
     <Compile Include="PerformanceTests\Context\ContextCreateEntity.cs" />
     <Compile Include="PerformanceTests\Context\ContextGetGroup.cs" />
@@ -69,7 +62,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="PerformanceTests\" />
-    <Folder Include="PerformanceTests\Entity\" />
     <Folder Include="PerformanceTests\Fixtures\" />
     <Folder Include="PerformanceTests\EntityMatcher\" />
     <Folder Include="PerformanceTests\GroupObserver\" />

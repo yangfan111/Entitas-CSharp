@@ -84,7 +84,7 @@
     <Compile Include="Entitas.CodeGeneration.Plugins\EntityIndex\CodeGenerators\EntityIndexGenerator.cs" />
     <Compile Include="Entitas.CodeGeneration.Plugins\EntityIndex\DataProviders\EntityIndexDataProvider.cs" />
     <Compile Include="Entitas.CodeGeneration.Plugins\EntityIndex\EntityIndexData.cs" />
-    <Compile Include="Entitas.CodeGeneration.Plugins\Entity\CodeGenerators\EntityGenerator.cs" />
+    <Compile Include="Entitas.CodeGeneration.Plugins\EntityExt\CodeGenerators\EntityGenerator.cs" />
     <Compile Include="Entitas.CodeGeneration.Plugins\Events\CodeGenerators\EventEntityApiGenerator.cs" />
     <Compile Include="Entitas.CodeGeneration.Plugins\Events\CodeGenerators\EventListenerComponentGenerator.cs" />
     <Compile Include="Entitas.CodeGeneration.Plugins\Events\CodeGenerators\EventListenertInterfaceGenerator.cs" />

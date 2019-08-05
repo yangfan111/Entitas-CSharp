@@ -19,6 +19,9 @@ namespace Entitas
          IComponent CreateComponent(int index, Type getType);
          void ReplaceComponent(int index, IComponent clonedComponent);
          void AddComponent(int index, IComponent clonedComponent);
+         bool HasComponent(int index);
+
+         void RemoveComponent(int index);
      }
 
     public delegate void EntityExtComponentChanged(IEntityExt entity, int index, IComponent component);

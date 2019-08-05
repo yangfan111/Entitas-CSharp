@@ -13,7 +13,7 @@ namespace MyNamespace {
         public CustomMutiEntityIndexer(TestContext context)
             : base(
                 "MyCustomEntityIndex",
-                context.GetGroup(Matcher<TestEntity>.CreateAllOf(TestMatcher.Position, TestMatcher.Size)),
+                context.AddGetGroup(Matcher<TestEntity>.CreateAllOf(TestMatcher.Position, TestMatcher.Size)),
                 (e, c) => {
                     var position = c is PositionComponent ? (PositionComponent)c : e.position;
                     var size = c is SizeComponent ? (SizeComponent)c : e.size;

@@ -41,8 +41,8 @@
     <Compile Include="Entitas.VisualDebugging.Unity\DebugSystems\DebugSystems.cs" />
     <Compile Include="Entitas.VisualDebugging.Unity\DebugSystems\DebugSystemsBehaviour.cs" />
     <Compile Include="Entitas.VisualDebugging.Unity\DebugSystems\SystemInfo.cs" />
-    <Compile Include="Entitas.VisualDebugging.Unity\Entity\DontDrawComponentAttribute.cs" />
-    <Compile Include="Entitas.VisualDebugging.Unity\Entity\EntityBehaviour.cs" />
+    <Compile Include="Entitas.VisualDebugging.Unity\EntityExt\DontDrawComponentAttribute.cs" />
+    <Compile Include="Entitas.VisualDebugging.Unity\EntityExt\EntityBehaviour.cs" />
     <Compile Include="Entitas.VisualDebugging.Unity\GameObjectDestroyExtension.cs" />
   </ItemGroup>
   <ItemGroup>

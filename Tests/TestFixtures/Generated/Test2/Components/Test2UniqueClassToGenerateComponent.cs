@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class Test2Context {
 
-    public Test2Entity uniqueClassToGenerateEntity { get { return GetGroup(Test2Matcher.UniqueClassToGenerate).GetSingleEntity(); } }
+    public Test2Entity uniqueClassToGenerateEntity { get { return AddGetGroup(Test2Matcher.UniqueClassToGenerate).GetSingleEntity(); } }
     public UniqueClassToGenerateComponent uniqueClassToGenerate { get { return uniqueClassToGenerateEntity.uniqueClassToGenerate; } }
     public bool hasUniqueClassToGenerate { get { return uniqueClassToGenerateEntity != null; } }
 

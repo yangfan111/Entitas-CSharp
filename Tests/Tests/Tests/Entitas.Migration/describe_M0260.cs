@@ -82,7 +82,7 @@ public static class Pools {
             poolsFile.fileContent.should_be(@"using System.Collections.Generic;
 
 namespace Entitas {
-    public partial class Entity {
+    public partial class EntityExt {
         public ScoreComponent score { get { return (ScoreComponent)GetComponent(ComponentIds.Score); } }
 
         public bool hasScore { get { return HasComponent(ComponentIds.Score); } }
@@ -93,13 +93,13 @@ namespace Entitas {
             _scoreComponentPool.Clear();
         }
 
-        public Entity AddScore(int newValue) {
+        public EntityExt AddScore(int newValue) {
             var component = _scoreComponentPool.Count > 0 ? _scoreComponentPool.Pop() : new ScoreComponent();
             component.value = newValue;
             return AddComponent(ComponentIds.Score, component);
         }
 
-        public Entity ReplaceScore(int newValue) {
+        public EntityExt ReplaceScore(int newValue) {
             var previousComponent = hasScore ? score : null;
             var component = _scoreComponentPool.Count > 0 ? _scoreComponentPool.Pop() : new ScoreComponent();
             component.value = newValue;
@@ -110,7 +110,7 @@ namespace Entitas {
             return this;
         }
 
-        public Entity RemoveScore() {
+        public EntityExt RemoveScore() {
             var component = score;
             RemoveComponent(ComponentIds.Score);
             _scoreComponentPool.Push(component);
@@ -119,13 +119,13 @@ namespace Entitas {
     }
 
     public partial class Pool {
-        public Entity scoreEntity { get { return GetGroup(Matcher.Score).GetSingleEntity(); } }
+        public EntityExt scoreEntity { get { return AddGetGroup(Matcher.Score).GetSingleEntity(); } }
 
         public ScoreComponent score { get { return scoreEntity.score; } }
 
         public bool hasScore { get { return scoreEntity != null; } }
 
-        public Entity SetScore(int newValue) {
+        public EntityExt SetScore(int newValue) {
             if (hasScore) {
                 //throw new SingleEntityException(Matcher.Score);
             }
@@ -134,7 +134,7 @@ namespace Entitas {
             return entity;
         }
 
-        public Entity ReplaceScore(int newValue) {
+        public EntityExt ReplaceScore(int newValue) {
             var entity = scoreEntity;
             if (entity == null) {
                 entity = SetScore(newValue);

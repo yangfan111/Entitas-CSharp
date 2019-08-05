@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class TestContext {
 
-    public TestEntity uniqueStandardEntity { get { return GetGroup(TestMatcher.UniqueStandard).GetSingleEntity(); } }
+    public TestEntity uniqueStandardEntity { get { return AddGetGroup(TestMatcher.UniqueStandard).GetSingleEntity(); } }
     public UniqueStandardComponent uniqueStandard { get { return uniqueStandardEntity.uniqueStandard; } }
     public bool hasUniqueStandard { get { return uniqueStandardEntity != null; } }
 

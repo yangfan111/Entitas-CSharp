@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class TestContext {
 
-    public TestEntity customPrefixFlagEntity { get { return GetGroup(TestMatcher.CustomPrefixFlag).GetSingleEntity(); } }
+    public TestEntity customPrefixFlagEntity { get { return AddGetGroup(TestMatcher.CustomPrefixFlag).GetSingleEntity(); } }
 
     public bool myCustomPrefixFlag {
         get { return customPrefixFlagEntity != null; }
