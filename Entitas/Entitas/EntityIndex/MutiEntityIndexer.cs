@@ -55,7 +55,7 @@ namespace Entitas
             {
                 foreach (var entity in entities)
                 {
-                    entity.Release(this,false);
+                    entity.InternalRelease(this,false);
                 }
             }
 
@@ -71,7 +71,7 @@ namespace Entitas
         protected override void RemoveEntityWithKey(TKey key, TEntity entity)
         {
             GetEntities(key).Remove(entity);
-            entity.Release(this,false);
+            entity.InternalRelease(this,false);
         }
     }
 }

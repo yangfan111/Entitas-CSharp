@@ -37,7 +37,7 @@ namespace Entitas
             }
         }
 
-        public void Release(object owner, bool throwIfNotExisted=true)
+        public void InternalRelease(object owner, bool throwIfNotExisted=true)
         {
             if (!owners.Remove(owner) && throwIfNotExisted)
             {

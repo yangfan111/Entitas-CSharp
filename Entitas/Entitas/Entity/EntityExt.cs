@@ -29,9 +29,9 @@ namespace Entitas
             Aerc.Retain(this, throwIfRepeated);
         }
 
-        public void Release(object owner, bool throwIfRepeated = true)
+        public void InternalRelease(object owner, bool throwIfRepeated = true)
         {
-            Aerc.Release(owner, throwIfRepeated);
+            Aerc.InternalRelease(owner, throwIfRepeated);
             // TODO VD PERFORMANCE
             // _toStringCache = null;
             if (Aerc.RetainCount == 0)
@@ -207,7 +207,7 @@ namespace Entitas
 
         #region // entity option
 
-        public void Destroy()
+        public void InternalDestroy()
         {
             if (OnEntityBeforeDestroy != null)
             {

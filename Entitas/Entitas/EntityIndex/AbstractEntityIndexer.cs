@@ -3,7 +3,7 @@ using System;
 namespace Entitas
 {
     /// <summary>
-    /// Group有变化会通知EntityIndexer
+    /// 持有一个group，Group有变化会通知EntityIndexer
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
@@ -109,7 +109,7 @@ namespace Entitas
 
         protected virtual void RemoveEntityWithKey(TKey key, TEntity entity)
         {
-            entity.Release(this,false);
+            entity.InternalRelease(this,false);
         }
 
         ~AbstractEntityIndexer()

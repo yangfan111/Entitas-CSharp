@@ -2,6 +2,7 @@
 
 namespace Entitas
 {
+    /// 掌管Collector的System
     /// A ReactiveSystem calls Execute(entities) if there were changes based on
     /// the specified Collector and will only pass in changed entities.
     /// A common use-case is to react to changes, e.g. a change of the position
@@ -76,7 +77,7 @@ namespace Entitas
                     {
                         for (int i = 0; i < entityBuffer.Count; i++)
                         {
-                            entityBuffer[i].Release(this);
+                            entityBuffer[i].InternalRelease(this);
                         }
 
                         entityBuffer.Clear();

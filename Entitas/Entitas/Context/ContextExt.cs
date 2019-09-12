@@ -8,7 +8,7 @@ namespace Entitas
 
     {
         //entitas的回收池
-        private readonly Stack<T> recycleentitiesPool = new Stack<T>();
+        private readonly Stack<T> recycleEntitiesPool = new Stack<T>();
 
         //entitas其他持有项
         readonly HashSet<T> retainedEntities = new HashSet<T>(EntityEqualityComparer<T>.Comparer);
@@ -22,10 +22,8 @@ namespace Entitas
         //component index => Group List 索引,用作Component更新后Group内部查询
         private readonly List<IGroup<T>>[] selfComponentGroups;
 
-        //------------TODO:-----------
         private readonly ObjectPool<List<GroupChanged<T>>> groupChangedListPool;
         private readonly Dictionary<string, IEntityExtIndex> entityIndices;
-        //------------TODO：-----------    
         
         private Func<T, IAERC> aercFactory;
         private int creationIndex;
@@ -141,7 +139,6 @@ namespace Entitas
                     {
                         selfComponentGroups[index] = new List<IGroup<T>>();
                     }
-
                     selfComponentGroups[index].Add(group);
                 }
 
@@ -187,9 +184,9 @@ namespace Entitas
         public T CreateEntity()
         {
             T entity;
-            if (recycleentitiesPool.Count > 0)
+            if (recycleEntitiesPool.Count > 0)
             {
-                entity = recycleentitiesPool.Pop();
+                entity = recycleEntitiesPool.Pop();
                 //-使用_creationIndex做标记索引
                 entity.Relive(creationIndex++);
             }
@@ -235,7 +232,7 @@ namespace Entitas
         {
             foreach (var entity in selfEntities)
             {
-                entity.Destroy();
+                entity.InternalDestroy();
             }
 
             selfEntities.Clear();
@@ -300,7 +297,7 @@ namespace Entitas
             T tEntity = (T) entity;
             //selfEntities.Remove(tEntity);
             retainedEntities.Remove(tEntity);
-            recycleentitiesPool.Push(tEntity);
+            recycleEntitiesPool.Push(tEntity);
             CleanCache();
         }
 
@@ -327,10 +324,10 @@ namespace Entitas
             }
             else
             {
-                recycleentitiesPool.Push(tEntity);
+                recycleEntitiesPool.Push(tEntity);
             }
 
-            tEntity.Release(this);
+            tEntity.InternalRelease(this);
             if (OnEntityAfterDestroyed != null)
                 OnEntityAfterDestroyed(this, entityExt);
         }

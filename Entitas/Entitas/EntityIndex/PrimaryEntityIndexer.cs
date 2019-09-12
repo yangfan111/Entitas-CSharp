@@ -3,8 +3,13 @@ using System.Collections.Generic;
 
 namespace Entitas
 {
+    // public static PlayerEntity GetEntityWithEntityKey(this PlayerContext context, Core.EntityComponent.EntityKey Value) {
+    // return ((Entitas.PrimaryEntityIndex<PlayerEntity, Core.EntityComponent.EntityKey>)context.GetEntityIndex(Contexts.EntityKey_Id)).GetEntity(Value);
+    // }
+
     /// <summary>
     ///     唯一键值索引
+    /// 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
@@ -52,7 +57,7 @@ namespace Entitas
         {
             foreach (var entity in indexs.Values)
             {
-                entity.Release(this);
+                entity.InternalRelease(this);
             }
 
             indexs.Clear();

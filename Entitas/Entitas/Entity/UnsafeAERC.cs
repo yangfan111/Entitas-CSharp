@@ -22,7 +22,7 @@
 
         }
 
-        public void Release(object owner, bool throwIfNotExisted = true)
+        public void InternalRelease(object owner, bool throwIfNotExisted = true)
         {
             _retainCount -= 1;
         }

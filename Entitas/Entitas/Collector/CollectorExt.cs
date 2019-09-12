@@ -2,35 +2,32 @@ using System.Collections.Generic;
 
 namespace Entitas
 {
+    //持有若干Groups
     /// A Collector can observe one or more groups from the same context
     public class CollectorExt<TEntity> : ICollector<TEntity> where TEntity : class, IEntityExt
 
     {
-        private EGroupEvent[] eGroupEvents;
-        private GroupExt<TEntity>[] selfGroups;
+
+        private MatcherEvent<TEntity>[] triggers;
         
-        public CollectorExt(GroupExt<TEntity> group, EGroupEvent eGroupEvent) : this(new[] {group}, new[] {eGroupEvent})
+        // public CollectorExt(GroupExt<TEntity> group, EGroupEvent eGroupEvent) : this(new[] {group}, new[] {eGroupEvent})
+        // {
+        // }
+        public CollectorExt(MatcherEvent<TEntity>[] triggers)
         {
-        }
-
-        public CollectorExt(GroupExt<TEntity>[] selfGroups, EGroupEvent[] eGroupEvents)
-
-        {
-            this.selfGroups   = selfGroups;
-            this.eGroupEvents = eGroupEvents;
-            if (selfGroups.Length != eGroupEvents.Length)
-                FrameworkUtil.ThrowException("groups Length donot match events length");
+            this.triggers = triggers;
             CollectedEntities = new HashSet<TEntity>(EntityEqualityComparer<TEntity>.Comparer);
             Activate();
         }
+  
 
         public HashSet<TEntity> CollectedEntities { get; private set; }
 
         public void Deactivate()
         {
-            for (int i = 0; i < selfGroups.Length; i++)
+            for (int i = 0; i < triggers.Length; i++)
             {
-                var group = selfGroups[i];
+                GroupExt<TEntity> group = triggers[i].MatchedGroup;
                 group.OnEntityAddedWithComp  -= Collect;
                 group.OnEntityRemovedWithCmp -= Collect;
             }
@@ -42,7 +39,7 @@ namespace Entitas
         {
             foreach (var entity in CollectedEntities)
             {
-                entity.Release(this);
+                entity.InternalRelease(this);
             }
 
             CollectedEntities.Clear();
@@ -50,10 +47,10 @@ namespace Entitas
 
         public void Activate()
         {
-            for (int i = 0; i < selfGroups.Length; i++)
+            for (int i = 0; i < triggers.Length; i++)
             {
-                var group      = selfGroups[i];
-                var groupEvent = eGroupEvents[i];
+                var group      = triggers[i].MatchedGroup;
+                var groupEvent = triggers[i].EGroupEvent;
                 switch (groupEvent)
                 {
                     case EGroupEvent.Added:

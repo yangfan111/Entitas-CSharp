@@ -95,7 +95,7 @@ namespace Entitas
                 {
                     for (int i = 0; i < buffer.Count; i++)
                     {
-                        buffer[i].Release(this);
+                        buffer[i].InternalRelease(this);
                     }
 
                     collectedEntities.Clear();

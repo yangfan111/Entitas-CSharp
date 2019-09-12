@@ -157,7 +157,7 @@ namespace Entitas
                     OnEntityRemovedWithCmp(this, entity, index, component);
                 }
 
-                entity.Release(this);
+                entity.InternalRelease(this);
             }
         }
 
@@ -185,7 +185,7 @@ namespace Entitas
             {
                 CleanCache();
                 //-移除当前对象对它的引用
-                entity.Release(this);
+                entity.InternalRelease(this);
             }
 
             return removed;

@@ -15,16 +15,13 @@
                                                                    params MatcherEvent<TEntity>[] triggers)
         where TEntity : class, IEntityExt
         {
-            var groups      = new IGroup<TEntity>[triggers.Length];
-            var groupEvents = new EGroupEvent[triggers.Length];
+            // var groups      = new IGroup<TEntity>[triggers.Length];
+            // var groupEvents = new EGroupEvent[triggers.Length];
 
             for (int i = 0; i < triggers.Length; i++)
-            {
-                groups[i]      = context.GetGroup(triggers[i].matcher);
-                groupEvents[i] = triggers[i].EGroupEvent;
-            }
+                triggers[i].MatchedGroup  = context.GetGroup(triggers[i].matcher) as GroupExt<TEntity>;
 
-            return new CollectorExt<TEntity>((GroupExt<TEntity>[]) groups, groupEvents);
+            return new CollectorExt<TEntity>(triggers);
         }
     }
 }
